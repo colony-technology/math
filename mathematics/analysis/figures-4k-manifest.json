@@ -1,14 +1,14 @@
 {
   "schema": "mathematics.figure.gallery.v1",
-  "source": "native Blender render; identical files to Zenodo archival PNGs",
+  "source": "native Blender render; affine-cycles identical to its Zenodo archival PNG; cyclic-shift-energies, homogeneous-amplitude-elimination and damped-recurrence-certificates re-exported with the same pixels as their Zenodo archival PNGs",
   "figures": [
     {
       "paper": "cyclic-shift-energies",
       "repository_path": "mathematics/analysis/cyclic-shift-energies/figures/00-cover-4k.png",
       "width": 3840,
       "height": 2705,
-      "bytes": 9177945,
-      "sha256": "422cb8f42b2e2120d184f465c33f75ac18abd8f87fb032b801ce31e4cf262aa0",
+      "bytes": 9177517,
+      "sha256": "3eb322f065a7466dee8febdeaec5b7c34c4d3390e30fa1dc7000ce4af995f801",
       "zenodo_doi": "10.5281/zenodo.23897127"
     },
     {
@@ -16,8 +16,8 @@
       "repository_path": "mathematics/analysis/homogeneous-amplitude-elimination/figures/00-cover-4k.png",
       "width": 3840,
       "height": 2705,
-      "bytes": 8314540,
-      "sha256": "5d5827c5e38568e04df7472154af0e0d708574180be8f51b4e0baf5ca1182e07",
+      "bytes": 8314088,
+      "sha256": "f2cfb55ef86c6d43c97f79bcd666cc53855edb0a1684053e8b879c520bf2e2e5",
       "zenodo_doi": "10.5281/zenodo.23897131"
     },
     {
@@ -25,8 +25,8 @@
       "repository_path": "mathematics/analysis/damped-recurrence-certificates/figures/00-cover-4k.png",
       "width": 3840,
       "height": 2705,
-      "bytes": 8097274,
-      "sha256": "6695d18a65941cb12cf246645a678a10f969aa69d1dcad7ab1864e9e9cff3ac1",
+      "bytes": 8096828,
+      "sha256": "bc13848b98cbfcf719ca3a507b3955585918285cd1875aaecfac6a2788de9efc",
       "zenodo_doi": "10.5281/zenodo.23900237"
     },
     {
