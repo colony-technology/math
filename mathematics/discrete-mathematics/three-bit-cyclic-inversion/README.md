@@ -30,6 +30,10 @@ Expected inverse: `11, 22, 44, 49, 69, 88, 98, 127`.
 
 The complete-fiber checks cover every mask and target at widths 4 through 8 with k = 0: 87,296 fibers. A further 768 queries cover widths through 1024, and 112 queries check the r-bit extension. The general completeness and complexity statements are proved in the manuscript; the checks supplement the proof.
 
+## Lean 4
+
+The folder `lean/` proves Theorem 1, Theorem 2 and the Proposition in Lean 4.35.0 with Mathlib v4.35.0, on `BitVec w` for every admissible width. `lake build LeanPapers.ThreeBit` rebuilds its 85 theorems. The proofs use no `sorry`, no `native_decide` and no axiom beyond `propext`, `Classical.choice` and `Quot.sound`. `lean/README.md` lists each statement as compiled.
+
 ## Figure
 
 The native Blender scene shows eight boundary states and their actual bit paths for w = 7, c = y = 127, k = 0. The final three bits repeat the initial three bits on every path. Each bead and line is generated from the supplied recurrence trace.

@@ -7,3 +7,5 @@ Failure modes: reversed rotation convention; incorrect carry into bit zero; an a
 Compare the released inverse with full forward fibers for every mask and target at widths 4 through 8 (k=0). A supplied k translates the target by subtraction; cover nonzero k in independently selected wider cases. Replay the two preserved original case panels and their published complete solution sets, and compare to the unchanged original mathematical function bodies. Check the sharp example directly. For wider words compare independent recurrence implementations and verify each returned word. All original private source records remain separate from the public mathematics package.
 
 The public replay uses Python's standard library. It reports exact equality and operation bounds, rather than a hardware performance claim. General completeness follows from the proof.
+
+The Lean 4 development in `lean/` checks the proofs themselves: Theorems 1 and 2 for every width w >= 4 and the Proposition for every 2 <= r < w. The executable checks above remain an independent replay of the solver.
