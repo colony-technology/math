@@ -1,0 +1,61 @@
+{
+  "complete": true,
+  "checks": [
+    {
+      "id": "W1",
+      "pass": true,
+      "detail": "C is a bijection onto R for k=0..8 (174762 cells in all; 131072 at k=8); bottom-up H equals top-down H"
+    },
+    {
+      "id": "W2",
+      "pass": true,
+      "detail": "mu(mu(p)) = p on R and C(2N-1-j) = mu(C(j)) for all 174762 indices, k=0..8"
+    },
+    {
+      "id": "W3",
+      "pass": true,
+      "detail": "all 174762 steps unit steps of the periodic rectangle, k=0..8; join (n-1,0)->(n,0), closure (2n-1,0)->(0,0); mutations caught: second sheet forward, first Hilbert quarter untransposed"
+    },
+    {
+      "id": "W4",
+      "pass": true,
+      "detail": "sum dx = 2n, sum dy = 0, winding (1,0); reversed ring (-1,0); for k=1..8; mu(C) is the reversed ring; plain x differences sum to 0 (mutation caught); sign undefined at k=0"
+    },
+    {
+      "id": "W5",
+      "pass": true,
+      "detail": "F = m + k + h, Mm = -m, Mk = k, mean m = mean k = 0 on 24 rational fields, rectangles 2x1 to 16x8, including F = (7/5) t"
+    },
+    {
+      "id": "W6",
+      "pass": true,
+      "detail": "(a) on 96 random rational edge fields; (b) 288 seam fields (c in {0, 3/2, -2}, q in {7, -1/3, 0}); every grid 2n x n, n = 1..32"
+    },
+    {
+      "id": "W7",
+      "pass": true,
+      "detail": "overlap n, regular poles, both slopes -n/2 on 41 rational u in [-1,1]; flux n; n in {-3,-1,0,1,3,1/2,-7/3}"
+    },
+    {
+      "id": "W8",
+      "pass": true,
+      "detail": "r of order 12, s of order 2, s r s = r^-1; 24 distinct maps r^a s^b, closed under composition"
+    },
+    {
+      "id": "W9",
+      "pass": true,
+      "detail": "orbit counts by enumeration for all 45 odd primes below 200 (560836 pairs); p=97: 9312 pairs, 2352 orbits (2304 of size 4, 48 of size 2), all 9312 quotients rebuilt from the 2352 representatives"
+    },
+    {
+      "id": "W10",
+      "pass": true,
+      "detail": "parity, nonzero odd corners, zero total and the 1:3:3:1 split at degree-3 corners on all 37440 orientations of K4 (4 vertices, 6 edges), prism (6 vertices, 9 edges), honeycomb patch (13 vertices, 15 edges), honeycomb 2x2 torus (8 vertices, 12 edges)"
+    },
+    {
+      "id": "W11",
+      "pass": true,
+      "detail": "(1+z)/(1-z) = u, 1-z != 0, z(1/u) = -z(u), squared ratios (c) and (d), |z-1|^2 |u+1|^2 = 4, on 591 Gaussian rationals u and 7223 products; the bounds of (e) at 192 points of rational modulus; the exponential law and the limits are not checked here"
+    }
+  ],
+  "scope": "Finite checks of the stated ranges; the general statements are proved in paper.tex."
+}

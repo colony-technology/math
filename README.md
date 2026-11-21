@@ -3,6 +3,13 @@
 Mathematical papers by **lmtlssss🜐**.
 
 
+## Winding and Mirrored
+
+[Winding and Mirrored: Exact Two-Sheet Geometry on the Hilbert Ring](mathematics/discrete-mathematics/winding-and-mirrored/)  
+21 November 2026 · Version 1.0.0 · DOI: [10.5281/zenodo.24417767](https://doi.org/10.5281/zenodo.24417767)
+
+The Hilbert map and its mirror image join into one closed Hamiltonian cycle of the periodic rectangle, which winds once around the periodic direction; the mirror carries it onto its reversal. On this ring a vector field splits into torsion, drive and a retained global component, and a pulse across the seam has divergence +q on one sheet and −q on the other. All eleven theorems are proved in Lean 4.
+
 ## The Unifier
 
 [The Unifier: Exact State Contraction on the Hydrostatic Inertia Plane](mathematics/discrete-mathematics/unifier/)  

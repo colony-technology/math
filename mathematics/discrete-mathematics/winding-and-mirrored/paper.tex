@@ -1,0 +1,374 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=25mm,headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{lmroman10-regular.otf}[BoldFont=lmroman10-bold.otf,ItalicFont=lmroman10-italic.otf,BoldItalicFont=lmroman10-bolditalic.otf]
+\setmonofont{lmmono10-regular.otf}[Scale=MatchLowercase]
+\newfontfamily\authorsymbol{Noto Sans Symbols}
+\usepackage{amsmath,amssymb,amsthm,mathtools,booktabs,longtable,array}
+\usepackage{microtype}
+\usepackage[hidelinks,unicode]{hyperref}
+\usepackage{fancyhdr}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\small\itshape Winding and Mirrored}\fancyhead[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\setlength{\emergencystretch}{2em}
+% Theorems carry the identifiers of the statement list (W1 to W11).
+\newcommand{\thmid}{}
+\newtheorem*{idtheorem}{Theorem~\thmid}
+\newenvironment{theorem}[2][]{\renewcommand{\thmid}{#2}%
+  \if\relax\detokenize{#1}\relax\begin{idtheorem}\else\begin{idtheorem}[#1]\fi}%
+  {\end{idtheorem}}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\newcommand{\rect}{\mathcal R}
+\newcommand{\avg}[1]{\langle #1\rangle}
+\DeclareMathOperator{\dv}{div}
+\hypersetup{pdftitle={Winding and Mirrored: Exact Two-Sheet Geometry on the Hilbert Ring},pdfauthor={lmtlssss🜐},pdfsubject={Mathematics: exact two-sheet geometry},pdfkeywords={Hilbert curve, Hamiltonian cycle, winding number, reflection parity, discrete divergence, Dirac monopole, dihedral group, modular division, double spiral}}
+\title{\LARGE Winding and Mirrored: Exact Two-Sheet\\Geometry on the Hilbert Ring}
+\author{lmtlssss{\authorsymbol 🜐}}
+\date{21 November 2026\\[3pt]\small Version 1.0.0}
+\begin{document}
+\maketitle\thispagestyle{plain}
+\begin{abstract}
+We join the Hilbert map of order $k$ and its mirror image into one closed Hamiltonian cycle of the periodic $2^{k+1}\times2^k$ rectangle. The first sheet is traversed forward and the mirrored sheet backward. Every cell occurs once, every step is a unit step, and for every $k\ge1$ the cycle winds once around the periodic direction. The mirror carries the cycle onto its reversal, which winds once in the opposite sense. On this two-sheet ring a vector field splits exactly into a mirror-odd part, the torsion, a mirror-even part, the drive, and its mean, the retained global component. A single pulse $q$ across the seam between the sheets has divergence $+q$ on one sheet and $-q$ on the mirrored sheet: one half of a dipole and its return field. For a finite network of magnets, every corner where an odd number of magnets meet carries a nonzero charge, and the charges sum to zero; where three meet, the charge is $\pm1$ or $\pm3$. We also prove the overlap identities of the two-chart potentials of the Wu--Yang monopole, the relations of the dihedral group on twelve sectors, the count $(p^2-1)/4$ of orbits of the two sign mirrors on division modulo an odd prime $p$, and the identity by which the Möbius map $w\mapsto(1+w)/(1-w)$ carries the double spiral $z=\tanh(ct/2)$ to the logarithmic spiral $e^{ct}$. Every theorem is proved in Lean~4 with Mathlib.
+\end{abstract}
+\noindent\textit{Keywords.} Hilbert curve; Hamiltonian cycle; winding number; reflection parity; discrete divergence; Dirac monopole; dihedral group; modular division; double spiral.
+
+\medskip\noindent
+Throughout, $k\ge0$ is an integer, $n=2^k$ and $N=4^k=n^2$. Each theorem carries an identifier, W1 to W11, under which its Lean proof is listed in the last section. A letter introduced in one section keeps its meaning only within that section.
+
+\section{The closed Hilbert winding}
+\begin{definition}[Hilbert map]\label{def:hilbert}
+$H=H_k:\{0,\ldots,N-1\}\to\{0,\ldots,n-1\}^2$ is the Hilbert map of~\cite[Definition~6.1]{unifier}: $H_0(0)=(0,0)$, and with $s=2^k$, $H_{k+1}(q4^k+r)=\sigma_q(H_k(r))$ for $q\in\{0,1,2,3\}$ and $r<4^k$, where
+\begin{gather*}
+\sigma_0(x,y)=(y,x),\qquad\sigma_1(x,y)=(x,y+s),\\
+\sigma_2(x,y)=(x+s,y+s),\qquad\sigma_3(x,y)=(2s-1-y,\ s-1-x).
+\end{gather*}
+Two cells of $\Z^2$ are adjacent when they differ by exactly $1$ in one coordinate and agree in the other.
+\end{definition}
+
+We use three theorems of~\cite{unifier} without proof. By Theorem~T17 there, $H$ is a bijection onto $\{0,\ldots,n-1\}^2$. By Theorem~T18, $H(d)$ and $H(d+1)$ are adjacent whenever $d+1<N$. By Theorem~T19, $H(0)=(0,0)$ and $H(N-1)=(n-1,0)$. The curve is Hilbert's~\cite{hilbert}.
+
+\begin{definition}[Two-sheet ring]\label{def:ring}
+The rectangle is $\rect=\{0,\ldots,2n-1\}\times\{0,\ldots,n-1\}$. Its $x$ coordinate is periodic with period $2n$; its $y$ coordinate is not. The left sheet is the part with $x<n$ and the mirrored sheet the part with $x\ge n$. The mirror is
+\[
+\mu(x,y)=(2n-1-x,\ y).
+\]
+The ring $C=C_k:\{0,\ldots,2N-1\}\to\rect$ is
+\[
+C(j)=H(j)\quad(j<N),\qquad C(j)=\mu\bigl(H(2N-1-j)\bigr)\quad(N\le j<2N).
+\]
+Two cells of $\rect$ are neighbours when they agree in one coordinate and differ by exactly $1$ in the other, the $x$ coordinate taken cyclically: $(2n-1,y)$ and $(0,y)$ are neighbours.
+\end{definition}
+
+The first sheet is traversed forward. The second is the mirror image of the first, traversed backward.
+
+\begin{theorem}[Every cell once]{W1}
+$C$ is a bijection from $\{0,\ldots,2N-1\}$ onto $\rect$.
+\end{theorem}
+\begin{proof}
+On $\{0,\ldots,N-1\}$, $C=H$ is a bijection onto the left sheet $\{0,\ldots,n-1\}^2$ by T17. On $\{N,\ldots,2N-1\}$, $j\mapsto2N-1-j$ is a bijection onto $\{0,\ldots,N-1\}$, $H$ is a bijection onto the left sheet, and $\mu$ is a bijection from the left sheet onto the mirrored sheet, because $x\mapsto2n-1-x$ maps $\{0,\ldots,n-1\}$ onto $\{n,\ldots,2n-1\}$. The two sheets partition $\rect$, and the two index ranges partition $\{0,\ldots,2N-1\}$.
+\end{proof}
+
+\begin{theorem}[The mirror reverses the traversal]{W2}
+$\mu(\mu(v))=v$ for every $v\in\rect$, and ${C(2N-1-j)}={\mu(C(j))}$ for every $j<2N$.
+\end{theorem}
+\begin{proof}
+For $0\le x\le2n-1$, $2n-1-(2n-1-x)=x$. Let $j'=2N-1-j$. If $j<N$, then $j'\ge N$ and $C(j')=\mu(H(2N-1-j'))=\mu(H(j))=\mu(C(j))$. If $j\ge N$, then $j'<N$, so $C(j')=H(2N-1-j)$, while $\mu(C(j))=\mu(\mu(H(2N-1-j)))=H(2N-1-j)$ by the first statement.
+\end{proof}
+
+\begin{theorem}[Unit steps, closed]{W3}
+For every $j<2N$, the cells $C(j)$ and $C((j+1)\bmod 2N)$ are neighbours. The join is $C(N-1)=(n-1,0)$, $C(N)=(n,0)$, and the closure is $C(2N-1)=(2n-1,0)$, $C(0)=(0,0)$. Hence $C$ is a closed Hamiltonian cycle of the periodic rectangle, for every $k\ge0$.
+\end{theorem}
+\begin{proof}
+Adjacent cells of $\rect$ are neighbours: if $x'=x+1\le2n-1$, then $(x+1)\bmod2n=x'$. There are four kinds of step.
+
+If $j+1<N$, then $C(j)=H(j)$ and $C(j+1)=H(j+1)$ are adjacent by T18.
+
+If $N\le j$ and $j+1<2N$, put $i=2N-2-j$, so that $0\le i$ and $i+1\le N-1$. Then $C(j)=\mu(H(i+1))$ and $C(j+1)=\mu(H(i))$. The cells $H(i)$ and $H(i+1)$ are adjacent by T18, and $\mu$ preserves adjacency, because it negates differences in $x$ and keeps differences in $y$.
+
+If $j=N-1$, then $C(N-1)=H(N-1)=(n-1,0)$ by T19, and $C(N)=\mu(H(N-1))=\mu(n-1,0)=(n,0)$. These are adjacent.
+
+If $j=2N-1$, then $C(2N-1)=\mu(H(0))=\mu(0,0)=(2n-1,0)$ and $C(0)=H(0)=(0,0)$. Since $(2n-1+1)\bmod2n=0$, these are neighbours.
+
+Together with W1, $C$ visits every cell once and returns to its start by unit steps. The argument uses no assumption on $k$.
+\end{proof}
+
+For $k=0$ the rectangle is $2\times1$, and the cycle has the two cells $(0,0)$ and $(1,0)$; its two steps join the same pair of cells in both directions.
+
+\begin{definition}[Signed steps]\label{def:steps}
+Let $k\ge1$, so that $2n\ge4$. For neighbours $v=(x,y)$ and $v'=(x',y')$ of $\rect$, put $\Delta y=y'-y$ and
+\[
+\Delta x=\begin{cases}+1,&(x+1)\bmod2n=x',\\-1,&(x'+1)\bmod2n=x,\\0,&\text{otherwise}.\end{cases}
+\]
+The first two cases exclude each other, since together they give $2\equiv0\pmod{2n}$.
+\end{definition}
+
+At $k=0$ the period is $2$, and the step from $x=0$ to $x'=1$ satisfies both of the first two cases, so the sign of an $x$ step is not defined there.
+
+\begin{theorem}[Winding]{W4}
+Let $k\ge1$. Over the $2N$ steps of the cycle $C$, the sum of $\Delta x$ is $2n$ and the sum of $\Delta y$ is $0$. The winding of $C$ is therefore $(1,0)$ turns of the periodic direction. The reversed cycle $j\mapsto C(2N-1-j)$ has sums $-2n$ and $0$ and winding $(-1,0)$.
+\end{theorem}
+\begin{proof}
+Write $C(j)=(x_j,y_j)$. For $j+1<2N$ the proof of W3 shows that $C(j)$ and $C(j+1)$ are adjacent with $x_j,x_{j+1}\in\{0,\ldots,2n-1\}$. Then $\Delta x=x_{j+1}-x_j$: if $x_{j+1}=x_j+1$, the first case holds; if $x_{j+1}=x_j-1$, the second; if $x_{j+1}=x_j$, neither holds, because $2n\nmid1$. The closing step from $(2n-1,0)$ to $(0,0)$ has $\Delta x=+1$. The sum telescopes:
+\[
+\sum_{j<2N}\Delta x=\sum_{j<2N-1}(x_{j+1}-x_j)+1=x_{2N-1}-x_0+1=(2n-1)-0+1=2n.
+\]
+The differences $\Delta y$ telescope around the closed cycle to $0$. The reversed cycle consists of the same steps with $v$ and $v'$ exchanged. The definition of $\Delta x$ is symmetric under this exchange up to sign, and $\Delta y$ changes sign, so the sums become $-2n$ and $0$.
+\end{proof}
+
+By W2, the reversed cycle is $j\mapsto\mu(C(j))$. The mirror image of the ring is the ring traversed backward, and it winds once in the opposite sense.
+
+\section{Weighted vector, mirror parity and the retained global component}
+A weighted vector field on the ring assigns to each cell a vector of the plane, such as a rational weight times a given vector. A reflection of the plane in a vertical line reverses the $x$ direction. A field reflected through the seam therefore takes the value at the mirrored cell with its $x$ component negated. The statement below holds for every linear involution of this kind.
+
+For a finite set $X$, a field $K$ with $|X|\ne0$ in $K$ and a $K$-vector space $V$, the mean of $F:X\to V$ is $\avg F=|X|^{-1}\sum_{x\in X}F(x)$. We write $\avg F$ also for the constant function with this value.
+
+\begin{theorem}[Mirror parity split]{W5}
+Let $X$ be a finite set, $K$ a field in which $2\ne0$ and $|X|\ne0$, and $V$ a $K$-vector space; let $M$ be a $K$-linear map on the functions $X\to V$ such that $M(MF)=F$ for every $F$ and $M$ maps functions of mean zero to functions of mean zero. For $F:X\to V$ put
+\[
+h=\avg F,\qquad G=F-h,\qquad m=\tfrac12(G-MG),\qquad\kappa=\tfrac12(G+MG).
+\]
+Then $F=m+\kappa+h$, $Mm=-m$, $M\kappa=\kappa$, and $m$ and $\kappa$ have mean zero. Both hypotheses on $K$ hold in every field of characteristic $0$ when $X$ is nonempty. In particular the statement holds for $X=\rect$, $V=\Q^2$ and
+\[
+(MF)(v)=\bigl(-F_x(\mu(v)),\ F_y(\mu(v))\bigr).
+\]
+\end{theorem}
+\begin{proof}
+The mean is linear, and the mean of a constant function with value $h$ is $|X|^{-1}|X|h=h$. Hence $\avg G=\avg F-h=0$, and $\avg{MG}=0$ by the hypothesis on $M$. Since $m+\kappa=G$, $m+\kappa+h=F$. By linearity and $M(MG)=G$,
+\[
+Mm=\tfrac12(MG-G)=-m,\qquad M\kappa=\tfrac12(MG+G)=\kappa.
+\]
+Finally $\avg m=\tfrac12(\avg G-\avg{MG})=0$ and $\avg\kappa=\tfrac12(\avg G+\avg{MG})=0$.
+
+In characteristic $0$, $2\ne0$ and $|X|\ne0$ for nonempty $X$. For the instance, $\rect$ has $2N\ne0$ cells, and $M$ is $\Q$-linear. It is an involution:
+\[
+(M(MF))(v)=\bigl(F_x(\mu(\mu(v))),\ F_y(\mu(\mu(v)))\bigr)=F(v)
+\]
+by W2. Since $\mu$ permutes $\rect$, $\sum_v(MF)(v)=\bigl(-\sum_vF_x(v),\ \sum_vF_y(v)\bigr)$, so $M$ maps fields of mean zero to fields of mean zero.
+\end{proof}
+
+We call $m$ the torsion, $\kappa$ the drive and $h$ the retained global component of $F$. The torsion is the mirror-odd part of $F-h$ and the drive its mirror-even part. The hypothesis $|X|\ne0$ is needed for the mean: in $K=\Z/3$ with $|X|=3$ the mean is undefined.
+
+\section{One half of a dipole and the return field}
+In this section $n\ge1$ is any integer, and both coordinates of the grid $T=\Z/2n\times\Z/n$ are periodic.
+
+\begin{definition}[Edge field and divergence]\label{def:edge}
+An edge field $E=(E_x,E_y)$ assigns a rational number $E_x(v)$ to the edge from $v$ to $v+(1,0)$ and $E_y(v)$ to the edge from $v$ to $v+(0,1)$, for every $v\in T$. Its divergence at $v$ is outflow minus inflow,
+\[
+\dv E(v)=E_x(v)+E_y(v)-E_x\bigl(v-(1,0)\bigr)-E_y\bigl(v-(0,1)\bigr).
+\]
+The left sheet is the set of cells whose $x$ coordinate, taken in $\{0,\ldots,2n-1\}$, is less than $n$; the mirrored sheet is the rest. Put $v_L=(n-1,0)$ and $v_R=(n,0)$.
+\end{definition}
+
+\begin{theorem}[Mirror-return flux]{W6}
+\begin{enumerate}
+\item[(a)] $\sum_{v\in T}\dv E(v)=0$ for every edge field $E$.
+\item[(b)] Let $\omega,q\in\Q$, and let $E$ be the field with $E_x(v)=\omega$ for $v\ne v_L$, $E_x(v_L)=\omega+q$ and $E_y=0$. Then $\dv E(v_L)=q$, $\dv E(v_R)=-q$, and $\dv E(v)=0$ at every other cell. The sum of the divergence over the left sheet is $q$, and over the mirrored sheet $-q$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+(a) The translations $v\mapsto v-(1,0)$ and $v\mapsto v-(0,1)$ are bijections of the finite set $T$. Hence $\sum_vE_x(v-(1,0))=\sum_vE_x(v)$ and $\sum_vE_y(v-(0,1))=\sum_vE_y(v)$, and the sum of the divergence is $0$.
+
+(b) Write $[\,\cdot\,]$ for $1$ on a true statement and $0$ otherwise. Here $E_x(v)=\omega+q[v=v_L]$, and $v_L+(1,0)=v_R$, so
+\[
+\dv E(v)=\omega+q[v=v_L]-\omega-q[v-(1,0)=v_L]=q[v=v_L]-q[v=v_R].
+\]
+The cells $v_L$ and $v_R$ differ, because $n-1\not\equiv n\pmod{2n}$. This gives the three values. The left sheet contains $v_L$ and not $v_R$, and the mirrored sheet contains $v_R$ and not $v_L$.
+\end{proof}
+
+The constant flow $\omega$ winds around the periodic direction, as the ring of W4 does, and has divergence zero. Seen from the left sheet alone, the pulse is a single source of strength $q$, one half of a dipole. The mirrored sheet carries the sink $-q$, the return field. Over the whole periodic surface the two cancel, as (a) requires.
+
+The same count holds on any network, for instance three bar magnets meeting at a point. In the honeycomb artificial spin ice of Ladak, Read, Perkins, Cohen and Branford~\cite{ladak}, three magnetic bars meet at every vertex.
+
+\begin{definition}[Network of magnets]\label{def:magnets}
+Let $G$ be a finite graph without loops, multiple edges allowed. Give every edge a direction: the magnet on that edge has its north end at the head and its south end at the tail. The degree of a vertex is the number of edges incident to it. The charge of a vertex $v$ is
+\[
+\rho(v)=\#\{\text{edges with head }v\}-\#\{\text{edges with tail }v\}.
+\]
+\end{definition}
+
+\begin{theorem}[An odd corner is never neutral]{W10}
+\begin{enumerate}
+\item[(a)] $\rho(v)$ has the parity of the degree of $v$. In particular a vertex of odd degree has $\rho(v)\ne0$, for every choice of directions.
+\item[(b)] $\sum_v\rho(v)=0$.
+\item[(c)] At a vertex of degree $3$ the charge is one of $+3$, $+1$, $-1$, $-3$. Each value occurs for some choice of directions: of the $8$ choices of direction for the three edges at the vertex, $1$, $3$, $3$ and $1$ give these values.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+(a) An edge incident to $v$ has exactly one end at $v$, since there are no loops, and that end is either its head or its tail. Hence $\deg v=\#\text{heads}+\#\text{tails}$ at $v$, and $\rho(v)=\deg v-2\,\#\text{tails}$. An odd integer is not $0$.
+
+(b) Each edge contributes $+1$ at its head and $-1$ at its tail, and nothing elsewhere.
+
+(c) The charge depends only on the directions of the three edges at $v$. If $h$ of them have head $v$, then $\rho(v)=h-(3-h)=2h-3$, and $h\in\{0,1,2,3\}$ gives $-3,-1,+1,+3$. The number of choices with exactly $h$ heads at $v$ is $\binom3h$, which is $1,3,3,1$; the values $+3$ and $-3$ occur once each, and $+1$ and $-1$ three times each.
+\end{proof}
+
+In a network where three magnets meet at every corner, every corner therefore carries a charge, and the whole carries none. The charge is the negative of the divergence of the field that is $1$ on every edge in its direction, so (b) is W6(a) on an arbitrary graph, and (a) adds the parity.
+
+\section{Two gauge charts}
+In this section $\nu$ is a real number and $u\in[-1,1]$. Put
+\[
+a_N(u)=\frac{\nu(1-u)}2,\qquad a_S(u)=-\frac{\nu(1+u)}2.
+\]
+With $u=\cos\theta$ on the unit sphere, $A_N=a_N(u)\,d\varphi$ is a potential on the sphere without its south pole and $A_S=a_S(u)\,d\varphi$ one on the sphere without its north pole. These are the two-chart potentials of the Wu--Yang form of the Dirac monopole~\cite{wuyang}.
+
+\begin{theorem}[Two charts]{W7}
+\begin{enumerate}
+\item[(a)] $a_N(u)-a_S(u)=\nu$ for every $u$.
+\item[(b)] $a_N(1)=0$ and $a_S(-1)=0$: each potential is regular at its own pole.
+\item[(c)] $\dfrac{da_N}{du}=\dfrac{da_S}{du}=-\dfrac\nu2$.
+\item[(d)] $\displaystyle\int_{-1}^1\frac\nu2\,du=\nu$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+(a) $\tfrac12\nu(1-u)+\tfrac12\nu(1+u)=\nu$. (b) $1-1=0$ and $1+(-1)=0$. (c) Both functions are affine in $u$ with slope $-\nu/2$. (d) The integrand is constant on an interval of length $2$.
+\end{proof}
+
+By (c), the two potentials have the same curvature $a'(u)\,du\wedge d\varphi=\tfrac\nu2\sin\theta\,d\theta\wedge d\varphi$. By (a), on the overlap they differ by $\nu\,d\varphi$, the derivative of the phase of the transition function $e^{i\nu\varphi}$, which for integer $\nu$ winds $\nu$ times around the equator. By (d), the curvature integrated over the sphere and divided by $2\pi$ is $\nu$. This section is classical, and the paper claims nothing new in it.
+
+\section{Twelve sectors}
+On $\Z/12$ let $r(x)=x+1$ and $s(x)=-x$. The rotation $r$ advances one of twelve sectors, and $s$ is the mirror of the circle that fixes sector $0$.
+
+\begin{theorem}[Twelve sectors]{W8}
+$r$ has order $12$, $s$ has order $2$, $srs=r^{-1}$, and the $24$ maps $r^as^b$ with $a<12$ and $b<2$ are pairwise distinct.
+\end{theorem}
+\begin{proof}
+By induction $r^a(x)=x+a$, which is the identity exactly when $12\mid a$; so $r$ has order $12$. $s(s(x))=x$ and $s(1)=11\ne1$, so $s$ has order $2$. $s(r(s(x)))=-(-x+1)=x-1=r^{-1}(x)$. Finally $r^as^b(x)=(-1)^bx+a$. Its value at $0$ is $a$, which determines $a$; its value at $1$ is then $a+(-1)^b$, which determines $b$, since $1\ne-1$ in $\Z/12$.
+\end{proof}
+
+The relation $srs=r^{-1}$ states that the mirror reverses the sense of rotation. The $24$ maps form the dihedral group of order $24$.
+
+\section{Sign mirrors on division modulo a prime}
+Let $p$ be an odd prime and $D=\{(a,b)\in(\Z/p)^2:b\ne0\}$, with $|D|=p(p-1)$. The four sign mirrors $(a,b)\mapsto(\pm a,\pm b)$ map $D$ to itself.
+
+\begin{theorem}[Sign mirrors]{W9}
+\begin{enumerate}
+\item[(a)] Either single sign change carries $a/b$ to $-(a/b)$, and both together carry $a/b$ to $a/b$.
+\item[(b)] The orbits of the four sign mirrors on $D$ are $(p-1)^2/4$ orbits of size $4$, those with $a\ne0$, and $(p-1)/2$ orbits of size $2$, those with $a=0$; $(p^2-1)/4$ orbits in all. The pairs $(a,b)$ with $0\le a\le(p-1)/2$ and $1\le b\le(p-1)/2$, read as integers, are a set of representatives, one in each orbit, and there are $\tfrac{p+1}2\cdot\tfrac{p-1}2$ of them.
+\item[(c)] For $p=97$: $9{,}312$ pairs, $2{,}352$ orbits, $2{,}304$ of size $4$ and $48$ of size $2$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+(a) In a field, $(-a)b^{-1}=-(ab^{-1})$, $(-b)^{-1}=-b^{-1}$, and $(-a)(-b)^{-1}=ab^{-1}$.
+
+(b) Each sign mirror is an involution, any two commute, and the composite of the two single changes is the double change. The four maps therefore form a group, and their orbits partition $D$. The orbit of $(a,b)$ is $\{(\pm a,\pm b)\}$. Since $p$ is odd, $2$ is invertible modulo $p$, so $x\ne-x$ for $x\ne0$. As $b\ne0$, $b\ne-b$. If $a\ne0$, the four pairs are pairwise distinct; if $a=0$, the orbit is $\{(0,b),(0,-b)\}$. The $(p-1)^2$ pairs with $a\ne0$ fall into orbits of $4$, and the $p-1$ pairs with $a=0$ into orbits of $2$. This gives $(p-1)^2/4$ and $(p-1)/2$ orbits, and $(p-1)^2/4+2(p-1)/4=(p-1)(p+1)/4$ in all.
+
+With the residues taken in $\{0,\ldots,p-1\}$, for $x\ne0$ exactly one of $x$ and $p-x$ lies in $\{1,\ldots,(p-1)/2\}$. In the orbit of $(a,b)$ the sign of $b$ is therefore fixed by $1\le b\le(p-1)/2$. If $a\ne0$, the sign of $a$ is fixed by $a\le(p-1)/2$; if $a=0$, the condition holds already. Each orbit thus contains exactly one representative. There are $(p+1)/2$ choices of $a$ and $(p-1)/2$ choices of $b$.
+
+(c) $97\cdot96=9{,}312$, $96^2/4=2{,}304$, $96/2=48$, and $(97^2-1)/4=2{,}352$.
+\end{proof}
+
+By (a), the table of $a/b$ on $D$ is determined by its values on the $(p^2-1)/4$ representatives of (b). For $p=97$, $2{,}352$ entries determine all $9{,}312$. Division modulo $97$ is the task of Sheppard, Albalak, Lehman and Stanley~\cite{ufo}.
+
+\section{The double spiral}
+A double spiral is two spirals joined by an S and carried onto itself by a half-turn. In this section $a$ and $b$ are real with $a\ne0$, $c=a+ib$, and
+\[
+z(t)=\tanh\frac{ct}2\qquad(t\in\R).
+\]
+The Möbius map $w\mapsto(1+w)/(1-w)$ sends $-1$ to $0$, and its denominator vanishes exactly at $w=1$, where the numerator is $2$; on the Riemann sphere it sends $+1$ to $\infty$. For $w$ in the plane, $|1+w|/|1-w|$ is the ratio of the distances from $w$ to the two poles $-1$ and $+1$.
+
+\begin{theorem}[The double spiral is a straight line]{W11}
+\begin{enumerate}
+\item[(a)] $z(t)$ is defined for every real $t$, since $\cosh(ct/2)\ne0$; $z(0)=0$; and $z(-t)=-z(t)$. The half-turn about the centre reverses the direction along the curve.
+\item[(b)] $1-z(t)\ne0$ and
+\[
+\frac{1+z(t)}{1-z(t)}=e^{ct}.
+\]
+The Möbius map carries the curve to the logarithmic spiral $e^{ct}$. Its logarithms are the numbers $ct+2\pi i\ell$ with $\ell\in\Z$, so a logarithm carries the curve to the straight line $t\mapsto ct$; the principal logarithm equals $ct$ when $-\pi<bt\le\pi$.
+\item[(c)] $\left|\dfrac{1+z(t)}{1-z(t)}\right|=e^{at}$.
+\item[(d)] For every real $d$, the ratio in (c) at $t+d$ is $e^{ad}$ times the ratio at $t$. Equal steps along the line are equal ratios about the poles.
+\item[(e)] Let $a>0$. Then $|z(t)-1|=2/|e^{ct}+1|\le2/(e^{at}-1)$ for $t>0$, and $|z(t)+1|\le2/(e^{-at}-1)$ for $t<0$. Hence $z(t)\to1$ as $t\to+\infty$ and $z(t)\to-1$ as $t\to-\infty$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+Put $E=e^{ct}$, so that $|E|=e^{at}$, which equals $1$ only at $t=0$.
+
+(a) $\cosh w=\tfrac12e^{-w}(e^{2w}+1)$ vanishes only if $e^{2w}=-1$, which requires $|e^{2w}|=e^{2\operatorname{Re}w}=1$. For $w=ct/2$, $\operatorname{Re}w=at/2$ is $0$ only at $t=0$, where $\cosh0=1$. Hence $\cosh(ct/2)\ne0$ for every $t$. Since $\tanh0=0$ and $\tanh$ is odd, $z(0)=0$ and $z(-t)=-z(t)$.
+
+(b) $E\ne-1$: at $t\ne0$ because $|E|\ne1$, and at $t=0$ because $E=1$. With $w=ct/2$,
+\[
+z=\frac{e^w-e^{-w}}{e^w+e^{-w}}=\frac{e^{2w}-1}{e^{2w}+1}=\frac{E-1}{E+1}.
+\]
+Hence $1-z=2/(E+1)\ne0$, $1+z=2E/(E+1)$, and $(1+z)/(1-z)=E$. The solutions $L$ of $e^L=E$ are $ct+2\pi i\ell$ with $\ell\in\Z$. The principal logarithm is the solution with imaginary part in $(-\pi,\pi]$; when $-\pi<bt\le\pi$ this is $ct$, whose imaginary part is $bt$.
+
+(c) $|E|=e^{at}$. (d) $e^{a(t+d)}=e^{ad}e^{at}$.
+
+(e) $z-1=(E-1)/(E+1)-1=-2/(E+1)$, so $|z-1|=2/|E+1|$. For $a>0$ and $t>0$, $|E+1|\ge|E|-1=e^{at}-1>0$, which gives the bound, and the bound tends to $0$ as $t\to+\infty$. For $t<0$, (a) gives $z(t)+1=-(z(-t)-1)$, and the first bound at $-t>0$ applies.
+\end{proof}
+
+By (a), the half-turn $w\mapsto-w$ carries the curve onto itself and reverses its parameter. On the grid the mirror $\mu$ does the same to the ring (W2). The two spiral centres are the poles $\mp1$, and the S through $0$ joins them. By (d), dots placed at equal steps of $t$ lie at equal ratios of distance from the two poles. The double spiral is classical: it is the image of a logarithmic spiral under a Möbius map.
+
+\section{Conclusion}
+The two-sheet ring is a closed Hamiltonian cycle of the periodic rectangle for every $k\ge0$, and for $k\ge1$ it winds once around the periodic direction. The mirror reverses its traversal and its winding. A field on the ring is the sum of its torsion, its drive and its retained global component. A seam pulse has divergence $+q$ on one sheet and $-q$ on the mirrored sheet, and in a network of magnets every corner of odd degree is charged while the total charge is zero. The sign mirrors on division modulo an odd prime $p$ have $(p^2-1)/4$ orbits, and the double spiral is carried to a straight line by a Möbius map and a logarithm.
+
+Several parts of this paper are established. The curve of Section~1 is Hilbert's~\cite{hilbert}, in the form and with the theorems of~\cite{unifier}. Moore's curve~\cite{moore} is a closed variant of it inside a square. The potentials of Section~4 are the Wu--Yang form of the Dirac monopole~\cite{wuyang}. The group of Section~5 is the dihedral group of order $24$. That the divergence of an edge field sums to zero, W6(a) and W10(b), is elementary, and the charged corners of W10 are what the honeycomb artificial spin ice shows~\cite{ladak}. The double spiral of Section~7 is the image of a logarithmic spiral under a Möbius map. Division modulo $97$, the instance in W9(c), is the task of~\cite{ufo}. The contribution of this paper is the two-sheet ring as a closed Hamiltonian cycle that winds once around the periodic direction for every size $k\ge1$, built from the Hilbert map and its mirror (Theorems W1 to W4); the mirror read as the reversal of the traversal, on the grid (Theorem W2) and on the smooth curve (Theorem W11(a)); the orbit count of Theorem W9 for every odd prime; and a formal proof of every theorem.
+
+A physical magnetic monopole is not established by any statement of this paper: W6 and W10 concern divergence on a graph, and W7 concerns two potentials on the sphere. The ring is a traversal order of a rectangle and not a compression theorem. The names torsion and drive denote the mirror-odd and the mirror-even part of a field and assert no physical law.
+
+\section{Executable verification}
+The standard-library script \texttt{verify.py} checks the finite content independently, with exact integer and rational arithmetic. It computes the Hilbert map of Definition~\ref{def:hilbert} twice, by quarters and point by point, and compares the two. It covers Theorems W1 to W3 for $k\le8$ ($174{,}762$ cells, of which $131{,}072$ at $k=8$) and W4 for $1\le k\le8$; W5 on $24$ rational fields on the rectangles from $2\times1$ to $16\times8$; W6(a) on $96$ rational edge fields and W6(b) on $288$ seam fields, on every grid $2n\times n$ with $n\le32$; W7 at $41$ rational points $u$ for seven values of $\nu$; W8 by composition of permutations of $\Z/12$; W9 by enumerating the orbits for every odd prime below $200$ ($560{,}836$ pairs), and at $p=97$ by rebuilding all $9{,}312$ quotients from the $2{,}352$ representatives; W10 on all $37{,}440$ orientations of the complete graph on four vertices, the triangular prism, a patch of three hexagons around one vertex and the honeycomb on the $2\times2$ torus; and W11(a) to (e) through the identity $(1+z)/(1-z)=u$ for $z=(u-1)/(u+1)$, on $591$ Gaussian rationals $u$ and $7{,}223$ products of two of them, with the bounds of W11(e) at $192$ points of rational modulus. The exponential law and the limits of W11(e) are left to the proofs. The script also runs three mutations, the second sheet traversed forward, the first Hilbert quarter left untransposed and the $x$ step taken as a plain difference, and each makes its check fail. Run \texttt{python3 verify.py}; it prints one line per statement and exits with a nonzero status on any failure. These checks supplement the proofs.
+
+\section{Formal verification}
+Every theorem of this paper is proved in Lean~4.35.0 with Mathlib v4.35.0. Table~\ref{tab:lean} lists the declarations for each statement and their files in the companion directory \texttt{lean/}; \texttt{lake build Winding} rebuilds all of them. The file \texttt{Hilbert.lean} is the Hilbert file of~\cite{unifier}, unchanged. W5 is proved in the form stated here, for a field in which $2\ne0$ and $|X|\ne0$. In W11(b) the logarithm is proved up to $2\pi i\ell$, and with the principal branch for $-\pi<bt\le\pi$. For W10(c), \texttt{charge\_eq\_cornerCharge} identifies the charge of a vertex of degree $3$ with the corner charge of its three edges, and \texttt{cornerCharge\_counts} counts their eight choices of direction as $1,3,3,1$. A listed declaration uses no \texttt{sorry}, \texttt{admit}, new axiom or \texttt{native\_decide}, and \texttt{\#print axioms} reports only \texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound}, or no axiom.
+{\small
+\begin{longtable}{@{}l>{\raggedright\arraybackslash}p{0.60\textwidth}l@{}}
+\caption{Checked Lean declarations.}\label{tab:lean}\\
+\toprule
+Statement & Lean declarations & File in \texttt{lean/Winding/}\\
+\midrule
+\endfirsthead
+\toprule
+Statement & Lean declarations & File in \texttt{lean/Winding/}\\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+W1 & \texttt{cycle},\allowbreak\ \texttt{rect},\allowbreak\ \texttt{cycle\_bijOn} & \texttt{Ring.lean}\\
+W2 & \texttt{mirror},\allowbreak\ \texttt{mirror\_mirror},\allowbreak\ \texttt{cycle\_reverse} & \texttt{Ring.lean}\\
+W3 & \texttt{Neighbour},\allowbreak\ \texttt{cycle\_step},\allowbreak\ \texttt{cycle\_adjacent},\allowbreak\ \texttt{cycle\_join\_left},\allowbreak\ \texttt{cycle\_join\_right},\allowbreak\ \texttt{cycle\_close\_left},\allowbreak\ \texttt{cycle\_start},\allowbreak\ \texttt{cycle\_hamiltonian} & \texttt{Ring.lean}\\
+W4 & \texttt{cycDx},\allowbreak\ \texttt{cycDx\_welldefined},\allowbreak\ \texttt{cycDx\_two\_ambiguous},\allowbreak\ \texttt{winding\_dx},\allowbreak\ \texttt{winding\_dy},\allowbreak\ \texttt{winding\_dx\_reverse},\allowbreak\ \texttt{winding\_dy\_reverse},\allowbreak\ \texttt{winding\_number} & \texttt{Ring.lean}\\
+W5 & \texttt{avg},\allowbreak\ \texttt{parity\_split},\allowbreak\ \texttt{parity\_split\_charZero},\allowbreak\ \texttt{vecMirror},\allowbreak\ \texttt{vecMirror\_involutive},\allowbreak\ \texttt{vecMirror\_meanZero},\allowbreak\ \texttt{parity\_split\_rect} & \texttt{Parity.lean}\\
+W6 & \texttt{divergence},\allowbreak\ \texttt{divergence\_sum},\allowbreak\ \texttt{seamField},\allowbreak\ \texttt{seam\_divergence},\allowbreak\ \texttt{seam\_divergence\_left},\allowbreak\ \texttt{seam\_divergence\_right},\allowbreak\ \texttt{seam\_divergence\_other},\allowbreak\ \texttt{seam\_left\_sheet},\allowbreak\ \texttt{seam\_right\_sheet},\allowbreak\ \texttt{seam\_sheets\_pow} & \texttt{Flux.lean}\\
+W7 & \texttt{chartN},\allowbreak\ \texttt{chartS},\allowbreak\ \texttt{chart\_overlap},\allowbreak\ \texttt{chartN\_north},\allowbreak\ \texttt{chartS\_south},\allowbreak\ \texttt{chartN\_hasDerivAt},\allowbreak\ \texttt{chartS\_hasDerivAt},\allowbreak\ \texttt{chart\_deriv},\allowbreak\ \texttt{chart\_flux} & \texttt{Charts.lean}\\
+W8 & \texttt{rot12},\allowbreak\ \texttt{refl12},\allowbreak\ \texttt{rot12\_order},\allowbreak\ \texttt{refl12\_order},\allowbreak\ \texttt{refl\_rot\_refl},\allowbreak\ \texttt{dihedral12\_injective},\allowbreak\ \texttt{dihedral12\_card} & \texttt{Dihedral.lean}\\
+W9 & \texttt{signMap},\allowbreak\ \texttt{signMap\_comp},\allowbreak\ \texttt{signMap\_div},\allowbreak\ \texttt{signOrbit},\allowbreak\ \texttt{signOrbits},\allowbreak\ \texttt{signOrbit\_signMap},\allowbreak\ \texttt{signReps\_represent},\allowbreak\ \texttt{card\_signOrbit\_four},\allowbreak\ \texttt{card\_signOrbit\_two},\allowbreak\ \texttt{sign\_orbits},\allowbreak\ \texttt{sign\_orbits\_97} & \texttt{SignOrbits.lean}\\
+W10 & \texttt{Multigraph},\allowbreak\ \texttt{Multigraph.charge},\allowbreak\ \texttt{degree\_eq\_head\_tail},\allowbreak\ \texttt{charge\_parity},\allowbreak\ \texttt{charge\_ne\_zero\_of\_odd},\allowbreak\ \texttt{charge\_sum},\allowbreak\ \texttt{charge\_degree\_three},\allowbreak\ \texttt{charge\_degree\_three\_attained},\allowbreak\ \texttt{cornerCharge\_counts},\allowbreak\ \texttt{charge\_eq\_cornerCharge} & \texttt{Corner.lean}\\
+W11 & \texttt{spiralZ},\allowbreak\ \texttt{mobius},\allowbreak\ \texttt{spiral\_cosh\_ne\_zero},\allowbreak\ \texttt{spiralZ\_zero},\allowbreak\ \texttt{spiralZ\_neg},\allowbreak\ \texttt{one\_sub\_spiralZ\_ne\_zero},\allowbreak\ \texttt{mobius\_spiralZ},\allowbreak\ \texttt{mobius\_poles},\allowbreak\ \texttt{log\_mobius\_spiralZ},\allowbreak\ \texttt{log\_mobius\_spiralZ\_principal},\allowbreak\ \texttt{norm\_mobius\_spiralZ},\allowbreak\ \texttt{norm\_mobius\_spiralZ\_step},\allowbreak\ \texttt{norm\_spiralZ\_sub\_one},\allowbreak\ \texttt{norm\_spiralZ\_sub\_one\_le},\allowbreak\ \texttt{norm\_spiralZ\_add\_one\_le},\allowbreak\ \texttt{spiralZ\_tendsto\_atTop},\allowbreak\ \texttt{spiralZ\_tendsto\_atBot} & \texttt{Spiral.lean}\\
+\end{longtable}
+}
+
+\enlargethispage{\baselineskip}
+\begin{thebibliography}{9}\raggedright
+\setlength{\itemsep}{2pt plus 1pt}\setlength{\parsep}{0pt}
+\bibitem{hilbert}
+D.~Hilbert,
+\emph{Über die stetige Abbildung einer Linie auf ein Flächenstück},
+Math. Ann. 38 (1891), 459--460.
+\bibitem{moore}
+E.~H. Moore,
+\emph{On certain crinkly curves},
+Trans. Amer. Math. Soc. 1 (1900), 72--90.
+\bibitem{unifier}
+lmtlssss{\authorsymbol 🜐}, \emph{The Unifier: Exact State Contraction on the Hydrostatic Inertia Plane}, Version 1.0.0, 2026.
+\href{https://doi.org/10.5281/zenodo.24415211}{doi:10.5281/zenodo.24415211}.
+\bibitem{wuyang}
+T.~T. Wu and C.~N. Yang,
+\emph{Concept of nonintegrable phase factors and global formulation of gauge fields},
+Phys. Rev. D 12 (1975), 3845--3857.
+\href{https://doi.org/10.1103/PhysRevD.12.3845}{doi:10.1103/PhysRevD.12.3845}.
+\bibitem{ladak}
+S.~Ladak, D.~E. Read, G.~K. Perkins, L.~F. Cohen and W.~R. Branford,
+\emph{Direct observation of magnetic monopole defects in an artificial spin-ice system},
+Nature Physics 6 (2010), 359--363.
+\href{https://doi.org/10.1038/nphys1628}{doi:10.1038/nphys1628}.
+\bibitem{ufo}
+T.~X. Sheppard, A.~Albalak, J.~Lehman and K.~O. Stanley,
+\emph{Are UFOs Real? Introducing Unified Factored Organizers},
+2026.
+\href{https://arxiv.org/abs/2611.11862}{arXiv:2611.11862}.
+\end{thebibliography}
+\end{document}
