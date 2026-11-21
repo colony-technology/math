@@ -1,0 +1,116 @@
+{
+  "complete": true,
+  "checks": [
+    {
+      "id": "T3",
+      "pass": true,
+      "detail": "3^h keys for h<=8 by enumeration; clog 3 (3^h) = h for h<200"
+    },
+    {
+      "id": "T5",
+      "pass": true,
+      "detail": "1(x)1=2; 4 bit pairs; square and half-normalization on 40401 pairs"
+    },
+    {
+      "id": "T6",
+      "pass": true,
+      "detail": "3 legal pairs onto {0,1,2}; inverse t->(t>=1,t>=2); corner (0,1) never decoded"
+    },
+    {
+      "id": "T7",
+      "pass": true,
+      "detail": "L=0..6, 1093 keys, upper decoder and lower encoder mutually inverse"
+    },
+    {
+      "id": "T8",
+      "pass": true,
+      "detail": "every window of length 0..12: 22369621 windows"
+    },
+    {
+      "id": "T9",
+      "pass": true,
+      "detail": "F_(S++S') = F_S o F_S' on all 283348537 concatenations of total length <= 12; c associative with identity 1"
+    },
+    {
+      "id": "T10",
+      "pass": true,
+      "detail": "both normal forms on every window of length 0..12, R in {0,1}"
+    },
+    {
+      "id": "T11",
+      "pass": true,
+      "detail": "3 classes; none of the 16 maps into one bit is a retained boundary; rails miss only (0,1)"
+    },
+    {
+      "id": "T12",
+      "pass": true,
+      "detail": "148104 congruences; residue tuple injective mod N on 376 instances; general form on 856 coefficient pairs, N<=24"
+    },
+    {
+      "id": "T13",
+      "pass": true,
+      "detail": "751 decompositions 1/N = sum eps_i/n_i with n_i<=30 (343 without n_i | N), x in [-60,60]"
+    },
+    {
+      "id": "T14",
+      "pass": true,
+      "detail": "x mod 12 for x in [-1000,1000]; n(n+1) family for n<=200, 120200 cases"
+    },
+    {
+      "id": "T15",
+      "pass": true,
+      "detail": "37500 single-dial readings; 272169 composed readings with error < 1/(2(nmax+nmin))"
+    },
+    {
+      "id": "T16",
+      "pass": true,
+      "detail": "54900 readings with |d|<1/(2N); d=1/(2N) gives x+1 for all N<=60"
+    },
+    {
+      "id": "T17",
+      "pass": true,
+      "detail": "bijection onto the 2^k grid for k=0..8 (87381 cells)"
+    },
+    {
+      "id": "T18",
+      "pass": true,
+      "detail": "consecutive cells at distance exactly 1 in one coordinate, k=0..8"
+    },
+    {
+      "id": "T19",
+      "pass": true,
+      "detail": "quarter equalities against top-down evaluation k<=8; H_k(0)=(0,0), H_k(4^k-1)=(2^k-1,0) k<=8"
+    },
+    {
+      "id": "T21",
+      "pass": true,
+      "detail": "(a),(b) for m<=243; (c) for 14400 pairs of range sizes m1,m2<=120"
+    },
+    {
+      "id": "T23",
+      "pass": true,
+      "detail": "rho o rho = rho on 66624 readings; ticks fixed; tolerance 1/(2n) for n<=64"
+    },
+    {
+      "id": "T24",
+      "pass": true,
+      "detail": "no periodic point on Z (t<=64); first return exactly n on Z/n for n<=64"
+    },
+    {
+      "id": "C1",
+      "pass": true,
+      "detail": "bijection on 89440 pairs for m<=64; n-th iterate = (F_n, F_n+1) mod m, n<=200"
+    },
+    {
+      "id": "C3",
+      "pass": true,
+      "detail": "(2k+1)^2 = 1 mod 4 for k<=10000; no 4n=(2k+1)^2 for n<=2000, k<=100"
+    },
+    {
+      "id": "C5",
+      "pass": true,
+      "detail": "carries and sum bits for 174760 additions, widths 1..8, carry-in 0 and 1; position trit = a_i + b_i"
+    }
+  ],
+  "scope": "Finite checks of the stated ranges; the general statements are proved in paper.tex."
+}

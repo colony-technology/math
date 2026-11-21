@@ -1,0 +1,620 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=25mm,headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{lmroman10-regular.otf}[BoldFont=lmroman10-bold.otf,ItalicFont=lmroman10-italic.otf,BoldItalicFont=lmroman10-bolditalic.otf]
+\setmonofont{lmmono10-regular.otf}[Scale=MatchLowercase]
+\newfontfamily\authorsymbol{Noto Sans Symbols}
+\usepackage{amsmath,amssymb,amsthm,mathtools,booktabs,longtable,array}
+\usepackage{microtype}
+\usepackage[hidelinks,unicode]{hyperref}
+\usepackage{fancyhdr}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\small\itshape The Unifier}\fancyhead[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\setlength{\emergencystretch}{2em}
+% Theorems carry the identifiers of the statement list (T1 to T25, C1 to C5).
+\newcommand{\thmid}{}
+\newtheorem*{idtheorem}{Theorem~\thmid}
+\newenvironment{theorem}[2][]{\renewcommand{\thmid}{#2}%
+  \if\relax\detokenize{#1}\relax\begin{idtheorem}\else\begin{idtheorem}[#1]\fi}%
+  {\end{idtheorem}}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newcommand{\B}{\{0,1\}}
+\newcommand{\xor}{\mathbin{\oplus}}
+\newcommand{\ot}{\mathbin{\otimes}}
+\newcommand{\sor}{\mathsf{or}\,}
+\newcommand{\sand}{\mathsf{and}\,}
+\newcommand{\cat}{\mathbin{+\!\!+}}
+\DeclareMathOperator{\dec}{dec}
+\DeclareMathOperator{\enc}{enc}
+\DeclareMathOperator{\cost}{cost}
+\DeclareMathOperator{\clog}{clog_3}
+\DeclareMathOperator{\rnd}{round}
+\hypersetup{pdftitle={The Unifier: Exact State Contraction on the Hydrostatic Inertia Plane},pdfauthor={lmtlssss🜐},pdfsubject={Mathematics: exact state contraction},pdfkeywords={exact state contraction, observation quotient, carry composition, residue systems, Hilbert curve, hydrostatics}}
+\title{\LARGE The Unifier: Exact State Contraction\\on the Hydrostatic Inertia Plane}
+\author{lmtlssss{\authorsymbol 🜐}}
+\date{21 November 2026\\[3pt]\small Version 1.0.0}
+\begin{document}
+\maketitle\thispagestyle{plain}
+\begin{abstract}
+We present a single mathematical object that contracts any family of observations to a minimal retained boundary and places that boundary on a hydrostatic inertia plane. The plane is a level of a fluid column at rest, where the pressure is linear in depth, $P=\rho gh$, and each pressure is attained at exactly one depth. The retained state is the ternary fork obtained from the native product $a\ot b=2ab$: every ordered window of $\sor$ and $\sand$ decisions acts on its incoming bit as one of three functions, and three states are necessary and sufficient. The path between surface gauge and depth is the reverse lookup furnished by residue systems with inverse constants, $x\equiv\sum_i\varepsilon_i(N/n_i)(x\bmod n_i)\pmod N$ whenever $1/N=\sum_i\varepsilon_i/n_i$. Hilbert traversal supplies the angular coordinate that preserves locality. Every function then factors as $\enc\circ\tau\circ\dec$, uniquely up to unique bijections, and its cost is the length $\lceil\log_3m\rceil$ of the trit key of its $m$ values. A straight positional scale has Lyapunov exponent $\log n>0$; a closed dial of $n$ ticks, of curvature $2\pi/n$, is a retraction onto its ticks with tolerance $1/(2n)$. Fibonacci accumulation, segmented logarithms, the impossible halfway root, dial systems and carry tables are special cases of the same contraction. Every theorem is proved in Lean~4 with Mathlib.
+\end{abstract}
+\noindent\textit{Keywords.} Exact state contraction; observation quotients; carry composition; residue systems; Hilbert curve; hydrostatics.
+
+\medskip\noindent
+Throughout, $\B$ is the set of bits, $\xor$ is exclusive or, $[\,\cdot\,]$ is $1$ for a true statement and $0$ otherwise, and $\clog m$ is the least $L\in\mathbb N$ with $3^L\ge m$. Each theorem carries an identifier, T1 to T25 and C1 to C5, under which its Lean proof is listed in the last section.
+
+\section{The inertia plane}
+An incompressible fluid at rest is in hydrostatic equilibrium when
+\begin{equation}\label{eq:hydro}
+\nabla P=\rho\mathbf g,\qquad\operatorname{div}\mathbf v=0,\qquad\partial_t\rho=0.
+\end{equation}
+Along a vertical column of constant density $\rho$ and constant gravitational acceleration $g$, with depth $h$ measured from the free surface, the first equation reads $P'(h)=\rho g$. The column is the object of this section.
+
+\begin{definition}[Hydrostatic column]\label{def:column}
+A pressure profile is a function $P:\mathbb R\to\mathbb R$ of the depth $h$, with constants $\rho,g\in\mathbb R$. It is in hydrostatic equilibrium when $P$ is differentiable with $P'(h)=\rho g$ for every $h$, and $P(0)=0$.
+\end{definition}
+
+In the column the pressure reduces to the linear depth relation.
+
+\begin{theorem}[Linear depth relation]{T1}
+In hydrostatic equilibrium,
+\begin{equation}\label{eq:pressure}
+P(h)=\rho gh\qquad(h\in\mathbb R).
+\end{equation}
+\end{theorem}
+\begin{proof}
+Put $D(h)=P(h)-\rho gh$. Then $D$ is differentiable and $D'(h)=\rho g-\rho g=0$ for every $h$. By the mean value theorem, for every $h$ there is $\xi$ between $0$ and $h$ with $D(h)-D(0)=D'(\xi)\,h=0$. Hence $D(h)=D(0)=P(0)=0$.
+\end{proof}
+
+\begin{theorem}[The level set is one depth]{T2}
+Let $P$ be in hydrostatic equilibrium with $\rho g\ne0$. For every pressure $p\in\mathbb R$ there is exactly one depth $h$ with $P(h)=p$, namely $h=p/(\rho g)$.
+\end{theorem}
+\begin{proof}
+By T1, $P(h)=p$ holds exactly when $\rho gh=p$. Since $\rho g\ne0$, this holds exactly when $h=p/(\rho g)$.
+\end{proof}
+
+The inertia plane at pressure $p$ is the level $h=p/(\rho g)$ of Theorem T2. All subsequent observations are surface gauges of this level. The commitment is the interface; the bulk is never required. Section 2 gives this its exact sense: every observation factors through the retained boundary. A trit key of length $h$ is a word $(t_0,\ldots,t_{h-1})$ with every $t_i\in\{0,1,2\}$.
+
+\begin{theorem}[Depth counts keys]{T3}
+There are $3^h$ trit keys of length $h$, and $\clog(3^h)=h$. The key length of a full level is its depth.
+\end{theorem}
+\begin{proof}
+Each of the $h$ positions takes three values independently, which gives $3^h$ keys. The inequality $3^L\ge3^h$ holds for $L=h$ and fails for every $L<h$, because $3>1$. The least such $L$ is therefore $h$.
+\end{proof}
+
+\section{Exact state contraction}
+\begin{definition}[Observation equivalence]\label{def:equiv}
+Let $X$ be a set of states and $(O_i)_{i\in I}$ a family of observations $O_i:X\to V_i$. Two states are equivalent when every observation agrees:
+\begin{equation}
+x\sim y\iff O_i(x)=O_i(y)\ \text{for every } i\in I.
+\end{equation}
+This is an equivalence relation. Let $Q=X/{\sim}$, with projection $\pi:X\to Q$.
+\end{definition}
+
+\begin{definition}[Retained boundary]\label{def:boundary}
+A retained boundary is a map $b:X\to B$ such that $b(x)=b(y)$ implies $x\sim y$. It is exact when also $x\sim y$ implies $b(x)=b(y)$, and minimal when it is exact and onto.
+\end{definition}
+
+The exact state contraction is the quotient $Q$ together with $\pi$.
+
+\begin{theorem}[The contraction]{T4}
+\begin{enumerate}
+\item[(a)] $\pi$ is a minimal retained boundary: $\pi(x)=\pi(y)$ exactly when $x\sim y$, and $\pi$ is onto.
+\item[(b)] For every retained boundary $b:X\to B$ there is exactly one map $r:b(X)\to Q$ with $r(b(x))=\pi(x)$ for all $x$, and $r$ is onto.
+\item[(c)] If $B$ is finite, then $Q$ is finite and $|Q|\le|B|$.
+\item[(d)] If $b:X\to B$ is a minimal retained boundary, there is exactly one bijection $e:B\to Q$ with $e(b(x))=\pi(x)$ for all $x$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+(a) Two states have the same class exactly when they are equivalent. Every class is the class of each of its members, so $\pi$ is onto.
+
+(b) Every element of $b(X)$ has the form $b(x)$, and the required identity fixes $r(b(x))=\pi(x)$; so there is at most one such map. Define $r(b(x))=\pi(x)$. If $b(x)=b(y)$, then $x\sim y$ and $\pi(x)=\pi(y)$, so $r$ is well defined. It is onto because $\pi$ is onto.
+
+(c) The map $r$ of (b) sends the finite set $b(X)\subseteq B$ onto $Q$. Hence $|Q|\le|b(X)|\le|B|$.
+
+(d) A minimal boundary is onto, so $b(X)=B$ and $r$ of (b) is a map $B\to Q$. If $r(b(x))=r(b(y))$, then $\pi(x)=\pi(y)$, so $x\sim y$ and $b(x)=b(y)$ by exactness. Thus $r$ is injective, and it is onto by (b). Any bijection $e$ with $e\circ b=\pi$ satisfies the identity of (b), so $e=r$.
+\end{proof}
+
+In particular every observation factors through every retained boundary: with $\bar O_i([x])=O_i(x)$, which is well defined by Definition~\ref{def:equiv}, $O_i=\bar O_i\circ r\circ b$.
+
+\begin{definition}[Compact exact quotient]\label{def:compact}
+The kernel of a function $f:X\to Y$ is the equivalence $x\sim_fy\iff f(x)=f(y)$, the observation equivalence of the single observation $f$. The function admits a compact exact quotient when $X/{\sim_f}$ is finite.
+\end{definition}
+
+Anything that does not admit a compact exact quotient is declared Unknown. The contraction is observation-relative: different families of observations may produce different quotients, but each is exact for its own observations.
+
+\section{The retained ternary state}
+\begin{definition}[Native product]\label{def:native}
+The native product on the natural numbers is
+\begin{equation}
+a\ot b:=2ab.
+\end{equation}
+In particular $1\ot1=2$.
+\end{definition}
+
+\begin{theorem}[Native product]{T5}
+$1\ot1=2$. For bits $a,b\in\B$,
+\begin{equation}\label{eq:column}
+a+b=(a\xor b)+a\ot b.
+\end{equation}
+For all $a,b\in\mathbb N$, $(a+b)^2=a^2+b^2+a\ot b$, and $(a\ot b)/2=ab$.
+\end{theorem}
+\begin{proof}
+$1\ot1=2\cdot1\cdot1=2$. For bits, the four cases are $0=0+0$, $1=1+0$ twice, and $2=0+2$. Expanding gives $(a+b)^2=a^2+2ab+b^2$. Finally, $a\ot b=2ab$ is even with half $ab$.
+\end{proof}
+
+Identity~\eqref{eq:column} is one binary position of addition: $a\xor b$ is the sum bit and $a\ot b$ is the weight of the carry. Half-normalization recovers the product $ab$ from $a\ot b$.
+
+\begin{definition}[Trit fork]\label{def:fork}
+A pair of surrogate rails is a pair $(s,w)\in\B^2$, the strong rail $s$ and the weak rail $w$. The pair is legal unless $s=0$ and $w=1$. A legal pair produces the retained trit
+\begin{equation}
+t=s+w,
+\end{equation}
+with the decoding rules
+\begin{equation}\label{eq:decode}
+s=[t\ge1],\qquad w=[t\ge2].
+\end{equation}
+\end{definition}
+
+The corner $(0,1)$ is excluded; it does not lift to a legal trit. The rails are reconstructed once the trit is known.
+
+\begin{theorem}[The fork is a bijection]{T6}
+The map $(s,w)\mapsto s+w$ is a bijection from the three legal rail pairs onto $\{0,1,2\}$, with inverse~\eqref{eq:decode}. No $t\in\{0,1,2\}$ decodes to the corner $(0,1)$.
+\end{theorem}
+\begin{proof}
+The legal pairs $(0,0),(1,0),(1,1)$ have sums $0,1,2$. The rules~\eqref{eq:decode} send $0,1,2$ to $(0,0),(1,0),(1,1)$. Both composites are therefore identities. The three decoded pairs are legal, so the corner never occurs.
+\end{proof}
+
+For $L\in\mathbb N$, the upper decoder expands a packed surface index into the trit key by base-3 accumulation,
+\[
+u_L(n)=\bigl(n\bmod3,\ \lfloor n/3\rfloor\bmod3,\ \ldots,\ \lfloor n/3^{L-1}\rfloor\bmod3\bigr),
+\]
+and the lower encoder recovers the original index from the trit key,
+\[
+\ell_L(t_0,\ldots,t_{L-1})=\sum_{i=0}^{L-1}t_i3^i.
+\]
+
+\begin{theorem}[Base-3 accumulation]{T7}
+For every $L$, $\ell_L$ is a bijection from the trit keys of length $L$ onto $\{0,\ldots,3^L-1\}$, and $u_L$ and $\ell_L$ are mutually inverse.
+\end{theorem}
+\begin{proof}
+Induction on $L$. For $L=0$ there is one key, the empty word, and $\ell_0$ sends it to $0$. For the step, write a key of length $L+1$ as $(t_0,t')$ with $t'$ of length $L$. Then $\ell_{L+1}(t_0,t')=t_0+3\,\ell_L(t')$, and $u_{L+1}(n)=(n\bmod3,\ u_L(\lfloor n/3\rfloor))$ because $\lfloor\lfloor n/3\rfloor/3^i\rfloor=\lfloor n/3^{i+1}\rfloor$. Division with remainder writes each $n\in\{0,\ldots,3^{L+1}-1\}$ uniquely as $n=t_0+3n'$ with $t_0\in\{0,1,2\}$ and $n'\in\{0,\ldots,3^L-1\}$. Together with the induction hypothesis for $n'$, this proves both statements at $L+1$.
+\end{proof}
+
+The two kernels $u_L$ and $\ell_L$ are the air--water interface. The decoder is the surface gauge; the encoder is the pressure inversion. Each direction uses $L$ digit operations, and the bulk codebook of $3^L$ keys is never enumerated.
+
+\section{The fork in every ordered decision}
+This section shows that the trit fork is the state retained by every ordered decision. A carry chain is the principal example.
+
+\begin{definition}[Ordered decision]\label{def:window}
+A step is $\sor v$ or $\sand v$ with $v\in\B$. A window is a finite list of steps, written from the top. Its response to an incoming bit $R$ is defined by
+\[
+F_{[\,]}(R)=R,\qquad F_{\sor v::S}(R)=v\lor F_S(R),\qquad F_{\sand v::S}(R)=v\land F_S(R).
+\]
+The concatenation $S\cat S'$ places $S$ above $S'$. Let $E_S$ be the OR of the values of the $\sor$ steps of $S$ and $P_S$ the AND of the values of its $\sand$ steps, with the empty OR equal to $0$ and the empty AND equal to $1$.
+\end{definition}
+
+A carry chain of $n$ stages is the window $[\sor g_n,\sand p_n,\ldots,\sor g_1,\sand p_1]$, read from the top stage down, with $R$ the carry in.
+
+\begin{theorem}[A window is a fork]{T8}
+For every window $S$, $F_S(0)\le F_S(1)$. Hence $(s,w)=(F_S(1),F_S(0))$ is a legal rail pair, and
+\begin{equation}\label{eq:fork}
+F_S(R)=F_S(0)\lor\bigl(F_S(1)\land R\bigr)\qquad(R\in\B).
+\end{equation}
+With $t=s+w$: $t=0$ gives the constant $0$, $t=1$ gives the identity, and $t=2$ gives the constant $1$.
+\end{theorem}
+\begin{proof}
+Induction on $S$. For the empty window, $F(0)=0\le1=F(1)$. The maps $u\mapsto v\lor u$ and $u\mapsto v\land u$ are monotone on $\B$, so a step placed on top preserves $F_S(0)\le F_S(1)$. Since $w\le s$, the pair $(s,w)$ is not $(0,1)$. At $R=0$ the right side of~\eqref{eq:fork} is $F_S(0)$; at $R=1$ it is $F_S(0)\lor F_S(1)=F_S(1)$. By Theorem T6 the three trits are the pairs $(0,0)$, $(1,0)$ and $(1,1)$, which are the constant $0$, the identity and the constant $1$.
+\end{proof}
+
+We call $t_S=F_S(1)+F_S(0)$ the trit of $S$. By Theorems T6 and T8, the trit and the response determine each other.
+
+\begin{theorem}[The carry table]{T9}
+For all windows $S,S'$ and every $R$, $F_{S\cat S'}(R)=F_S(F_{S'}(R))$. The trit of $S\cat S'$ is $c(t_S,t_{S'})$, where
+\begin{equation}\label{eq:carrytable}
+c(t,t')=\begin{cases}t',&t=1,\\t,&t\ne1.\end{cases}
+\end{equation}
+The operation $c$ is associative with identity $1$.
+\end{theorem}
+\begin{proof}
+Induction on $S$. For $S=[\,]$ both sides equal $F_{S'}(R)$. For a step $\sigma$ on top of $S_0$, $(\sigma::S_0)\cat S'=\sigma::(S_0\cat S')$, and the induction hypothesis gives $F_{\sigma::(S_0\cat S')}(R)=\sigma(F_{S_0}(F_{S'}(R)))=F_{\sigma::S_0}(F_{S'}(R))$.
+
+If $t_S=1$, then $F_S$ is the identity, so $F_{S\cat S'}=F_{S'}$ and the trit is $t_{S'}$. If $t_S\in\{0,2\}$, then $F_S$ is constant, so $F_S\circ F_{S'}$ is the same constant and the trit is $t_S$. This is~\eqref{eq:carrytable}.
+
+If $t\ne1$, both $c(c(t,t'),t'')$ and $c(t,c(t',t''))$ equal $t$. If $t=1$, both equal $c(t',t'')$. Finally $c(1,t)=t$ by definition, and $c(t,1)=t$ both for $t\ne1$ and for $t=1$.
+\end{proof}
+
+\begin{theorem}[Two normal forms]{T10}
+For every window $S$ and every $R\in\B$,
+\begin{equation}\label{eq:normal}
+F_S(R)=F_S(0)\lor(P_S\land R)\qquad\text{and}\qquad F_S(R)=F_S(1)\land(E_S\lor R).
+\end{equation}
+\end{theorem}
+\begin{proof}
+Induction on $S$. For the empty window, $R=0\lor(1\land R)=1\land(0\lor R)$.
+
+For $\sor v$ on top, $P$ is unchanged, $E$ becomes $v\lor E_S$, and $F(0)=v\lor F_S(0)$, $F(1)=v\lor F_S(1)$. Then $v\lor F_S(0)\lor(P_S\land R)=F(0)\lor(P\land R)$. By distributivity, $v\lor(F_S(1)\land(E_S\lor R))=(v\lor F_S(1))\land(v\lor E_S\lor R)=F(1)\land(E\lor R)$.
+
+For $\sand v$ on top, $E$ is unchanged, $P$ becomes $v\land P_S$, and $F(0)=v\land F_S(0)$, $F(1)=v\land F_S(1)$. Then $v\land(F_S(0)\lor(P_S\land R))=(v\land F_S(0))\lor((v\land P_S)\land R)=F(0)\lor(P\land R)$, and $v\land F_S(1)\land(E_S\lor R)=F(1)\land(E\lor R)$.
+\end{proof}
+
+For a carry chain, $F_S(0)$ is the generate bit of the group and $P_S$ is the AND of its propagate bits, so the first normal form is the group generate and propagate form of carry look-ahead. The second form is its dual. For a window whose steps alternate, the two forms are the alternating split of an AND-OR path and its dual~\cite{grinchuk,brennerhermann}.
+
+\begin{theorem}[Three states are necessary and sufficient]{T11}
+Consider the one-stage window $S(g,p)=[\sor g,\sand p]$ on the four states $(g,p)\in\B^2$, with the two observations $R\mapsto F_{S(g,p)}(R)$ for $R=0,1$. The exact contraction has exactly three classes. Hence there is no retained boundary into a set of fewer than two bits, and two rails suffice with exactly one corner unused.
+\end{theorem}
+\begin{proof}
+Here $F_{S(g,p)}(R)=g\lor(p\land R)$, so the two observations are $(g,\ g\lor p)$. The states $(0,0)$, $(0,1)$, $(1,0)$, $(1,1)$ give $(0,0)$, $(0,1)$, $(1,1)$, $(1,1)$. The classes are $\{(0,0)\}$, $\{(0,1)\}$ and $\{(1,0),(1,1)\}$. By Theorem T4(c), a retained boundary into a finite set $B$ needs $|B|\ge3$, while one bit has two values. The rails $(F(1),F(0))=(g\lor p,\ g)$ take the values $(0,0)$, $(1,0)$, $(1,1)$. They agree exactly when the observations agree, so the rails form an exact retained boundary into $\B^2$ that misses only the corner $(0,1)$.
+\end{proof}
+
+\section{Reverse lookup}
+\begin{definition}[Rounding and residues]\label{def:round}
+For real $y$, $\rnd(y)=\lfloor y+\tfrac12\rfloor$. For an integer $x$ and $n\ge1$, $x\bmod n$ is the remainder of $x$ in $\{0,\ldots,n-1\}$.
+\end{definition}
+
+\begin{theorem}[Mordell composition, integer form]{T12}
+Let $N\ge1$, let $n_1,\ldots,n_k\ge1$ each divide $N$, let $\varepsilon_i\in\{+1,-1\}$ and put $c_i=\varepsilon_iN/n_i$. Suppose
+\begin{equation}\label{eq:mordell}
+c_1+\cdots+c_k=1,\qquad\text{equivalently}\qquad\frac1N=\sum_{i=1}^k\frac{\varepsilon_i}{n_i}.
+\end{equation}
+Then for every integer $x$ and all integers $a_i$ with $a_i\equiv x\pmod{n_i}$,
+\begin{equation}\label{eq:compose}
+c_1a_1+\cdots+c_ka_k\equiv x\pmod N.
+\end{equation}
+In particular the tuple of residues $(x\bmod n_i)_i$ determines $x$ modulo $N$. More generally,~\eqref{eq:compose} holds for any integers $c_i$ with $N\mid c_in_i$ for every $i$ and $c_1+\cdots+c_k\equiv1\pmod N$.
+\end{theorem}
+\begin{proof}
+We prove the general form first. Write $a_i=x+n_iq_i$ with $q_i\in\mathbb Z$. Then $c_ia_i=c_ix+c_in_iq_i\equiv c_ix\pmod N$, because $N\mid c_in_i$. Summation gives
+\[
+\sum_ic_ia_i\equiv x\sum_ic_i\equiv x\pmod N.
+\]
+The signed coefficients satisfy both hypotheses: $c_in_i=\varepsilon_iN$, and $\sum_ic_i=1$. If $x$ and $x'$ have the same residues, take $a_i=x\bmod n_i$. Then $x\equiv\sum_ic_ia_i\equiv x'\pmod N$.
+\end{proof}
+
+The inverse constants $+1$ and $-1$ are the special case in which the coefficients remain unit.
+
+\begin{theorem}[Angle form]{T13}
+Let $N\ge1$, $n_1,\ldots,n_k\ge1$ and $\varepsilon_i\in\{+1,-1\}$ with $1/N=\sum_i\varepsilon_i/n_i$ in $\mathbb Q$. No divisibility is assumed. For every integer $x$ there is an integer $m$ with
+\begin{equation}
+\frac xN=\sum_{i=1}^k\varepsilon_i\,\frac{x\bmod n_i}{n_i}+m.
+\end{equation}
+\end{theorem}
+\begin{proof}
+Since $x\bmod n_i=x-n_i\lfloor x/n_i\rfloor$,
+\[
+\sum_i\varepsilon_i\frac{x\bmod n_i}{n_i}=x\sum_i\frac{\varepsilon_i}{n_i}-\sum_i\varepsilon_i\Bigl\lfloor\frac x{n_i}\Bigr\rfloor=\frac xN-m,\qquad m=\sum_i\varepsilon_i\Bigl\lfloor\frac x{n_i}\Bigr\rfloor\in\mathbb Z.\qedhere
+\]
+\end{proof}
+
+Read in turns, the angle $x/N$ on a dial of $N$ positions is the signed sum of the angles on the dials $n_i$, modulo one full turn. For example, $1/6=1/4-1/12$, although $4\nmid6$.
+
+\begin{theorem}[Instances]{T14}
+For every integer $x$,
+\begin{equation}\label{eq:zodiac}
+x\equiv4\,(x\bmod3)-3\,(x\bmod4)\pmod{12}.
+\end{equation}
+For every $n\ge1$ and every integer $x$,
+\begin{equation}\label{eq:tree}
+x\equiv(n+1)(x\bmod n)-n\bigl(x\bmod(n+1)\bigr)\pmod{n(n+1)}.
+\end{equation}
+\end{theorem}
+\begin{proof}
+For~\eqref{eq:tree} take $N=n(n+1)$, moduli $n$ and $n+1$, and signs $+1,-1$. Both moduli divide $N$, and $c=(n+1,-n)$ has sum $1$; this is the identity $1/n-1/(n+1)=1/(n(n+1))$. Theorem T12 with $a_i=x\bmod n_i$ gives~\eqref{eq:tree}. The case $n=3$ is~\eqref{eq:zodiac}.
+\end{proof}
+
+The twelve-fold zodiac is the instance $n_1=3$, $n_2=4$. The infinite tree family generated by successive differences $1/n-1/(n+1)=1/(n(n+1))$ yields the further instances~\eqref{eq:tree}.
+
+Reading through the table (closest tick on each dial, then compose) is the retained boundary map.
+
+\begin{theorem}[Tolerance of the table reader]{T15}
+\begin{enumerate}
+\item[(a)] Let $n\ge1$, $a\in\mathbb Z$ and $\theta\in\mathbb R$ with $|\theta-a/n|<1/(2n)$. Then $\rnd(n\theta)=a$.
+\item[(b)] Let $N$, $n_i$, $\varepsilon_i$ and $c_i$ be as in Theorem T12, with $n_{\min}\le n_i\le n_{\max}$ for all $i$. Let $x\in\mathbb Z$, and let the readings $\theta_i\in\mathbb R$ satisfy
+\[
+\Bigl|\theta_i-\frac{x\bmod n_i}{n_i}\Bigr|<\frac1{2(n_{\max}+n_{\min})}\qquad\text{for every }i.
+\]
+Then $a_i=\rnd(n_i\theta_i)$ equals $x\bmod n_i$, and $\sum_ic_ia_i\equiv x\pmod N$. The bound does not depend on $N$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+(a) The hypothesis gives $a-\tfrac12<n\theta<a+\tfrac12$, hence $a<n\theta+\tfrac12<a+1$ and $\lfloor n\theta+\tfrac12\rfloor=a$.
+
+(b) Since $n_{\min}\ge1$, $n_{\max}+n_{\min}>n_{\max}\ge n_i$. Each reading error is therefore below $1/(2n_i)$, the dial's own tolerance. Part (a) gives $a_i=x\bmod n_i$, and Theorem T12 gives the composition.
+\end{proof}
+
+The proof uses only reading errors below $1/(2n_{\max})$; the stated bound is smaller. Summing the raw angular positions is a redundant check whose tolerance collapses with $N$.
+
+\begin{theorem}[The raw sum collapses]{T16}
+Let $N\ge1$ and $x\in\mathbb Z$. Then $\rnd(N(x/N+d))=x$ whenever $|d|<1/(2N)$, and $\rnd(N(x/N+1/(2N)))=x+1$.
+\end{theorem}
+\begin{proof}
+$N(x/N+d)=x+Nd$ with $|Nd|<\tfrac12$, and Theorem T15(a) with $n=1$ gives $x$. In the second case, $\lfloor x+\tfrac12+\tfrac12\rfloor=x+1$.
+\end{proof}
+
+A single straight scale of $N$ positions thus tolerates exactly half of $1/N$. For the zodiac, the table reader tolerates $1/14$ of a turn on each dial, and the straight scale of twelve positions tolerates $1/24$. For the tree family the two tolerances are $1/(2(2n+1))$ and $1/(2n(n+1))$.
+
+\section{Hilbert angular coordinate}
+\begin{definition}[Hilbert map]\label{def:hilbert}
+Put $H_0(0)=(0,0)$. For $k\ge0$ and $s=2^k$, define four maps of $\mathbb Z^2$:
+\begin{gather*}
+\sigma_0(x,y)=(y,x),\qquad\sigma_1(x,y)=(x,y+s),\\
+\sigma_2(x,y)=(x+s,y+s),\qquad\sigma_3(x,y)=(2s-1-y,\ s-1-x).
+\end{gather*}
+Each $d<4^{k+1}$ is uniquely $d=q4^k+r$ with $q\in\{0,1,2,3\}$ and $r<4^k$. Put $H_{k+1}(d)=\sigma_q(H_k(r))$.
+\end{definition}
+
+\begin{theorem}[Bijection]{T17}
+For every $k$, $H_k$ is a bijection from $\{0,\ldots,4^k-1\}$ onto the grid $\{0,\ldots,2^k-1\}^2$.
+\end{theorem}
+\begin{proof}
+Induction on $k$. For $k=0$, $H_0$ maps $\{0\}$ onto $\{(0,0)\}$. Assume the claim for $k$ and put $s=2^k$ and $G=\{0,\ldots,s-1\}^2$. Each $\sigma_q$ is injective on $\mathbb Z^2$: it permutes or reflects the coordinates and translates. It maps $G$ onto, respectively,
+\[
+G_0=[0,s)\times[0,s),\quad G_1=[0,s)\times[s,2s),\quad G_2=[s,2s)\times[s,2s),\quad G_3=[s,2s)\times[0,s),
+\]
+intervals taken in $\mathbb Z$. For $\sigma_3$, $x\in[0,s)$ gives $s-1-x\in[0,s)$ and $y\in[0,s)$ gives $2s-1-y\in[s,2s)$. The four quadrants partition $\{0,\ldots,2s-1\}^2$. On the quarter $\{q4^k+r:r<4^k\}$, $H_{k+1}$ is $\sigma_q\circ H_k$, a bijection onto $G_q$. The quarters partition $\{0,\ldots,4^{k+1}-1\}$, so $H_{k+1}$ is a bijection.
+\end{proof}
+
+\begin{theorem}[Self-similarity]{T19}
+For every $k$, every $q\in\{0,1,2,3\}$ and every $r<4^k$, $H_{k+1}(q4^k+r)=\sigma_q(H_k(r))$. Moreover $H_k(0)=(0,0)$ and $H_k(4^k-1)=(2^k-1,0)$.
+\end{theorem}
+\begin{proof}
+The first statement is Definition~\ref{def:hilbert}. The endpoints follow by induction on $k$. For $k=0$ both points are $(0,0)$. With $s=2^k$, $H_{k+1}(0)=\sigma_0(0,0)=(0,0)$, and
+\[
+H_{k+1}(4^{k+1}-1)=H_{k+1}\bigl(3\cdot4^k+(4^k-1)\bigr)=\sigma_3(s-1,0)=(2s-1,0).\qedhere
+\]
+\end{proof}
+
+Two cells are adjacent when they differ by exactly $1$ in exactly one coordinate. Adjacent cells are at Chebyshev distance $1$.
+
+\begin{theorem}[Hilbert locality]{T18}
+For every $k$ and every $d$ with $d+1<4^k$, the cells $H_k(d)$ and $H_k(d+1)$ are adjacent.
+\end{theorem}
+\begin{proof}
+Induction on $k$. For $k=0$ there is no such $d$. Let $d+1<4^{k+1}$ and $s=2^k$. If $d$ and $d+1$ lie in one quarter $q$, they are $q4^k+r$ and $q4^k+r+1$ with $r+1<4^k$. The map $\sigma_q$ sends a difference $(\Delta x,\Delta y)$ to $(\Delta y,\Delta x)$, $(\Delta x,\Delta y)$ or $(-\Delta y,-\Delta x)$, so it preserves adjacency, and the induction hypothesis applies. Otherwise $d=q4^k+4^k-1$ and $d+1=(q+1)4^k$ with $q\in\{0,1,2\}$. By Theorem T19, $H_k(4^k-1)=(s-1,0)$ and $H_k(0)=(0,0)$. The three junctions are
+\[
+\sigma_0(s-1,0)=(0,s-1)\to\sigma_1(0,0)=(0,s),\quad
+\sigma_1(s-1,0)=(s-1,s)\to\sigma_2(0,0)=(s,s),
+\]
+\[
+\sigma_2(s-1,0)=(2s-1,s)\to\sigma_3(0,0)=(2s-1,s-1),
+\]
+and each pair is adjacent.
+\end{proof}
+
+The proof of T18 uses only the endpoint formulas of T19, which do not depend on T18. The $64\times64$ grid is $H_6$, and the $256\times256$ grid is $H_8$.
+
+\section{The Unifier}
+The Unifier names the factors of a function through its own exact contraction: $\dec$ is the surface gauge, $\tau$ is the trit-key path, and $\enc$ is the pressure inversion.
+
+\begin{theorem}[Unifier]{T20}
+For every function $f:X\to Y$ there are sets $Q$ and $K$, a surjection $\dec:X\to Q$, a bijection $\tau:Q\to K$ and an injection $\enc:K\to Y$ with
+\begin{equation}\label{eq:unifier}
+f=\enc\circ\tau\circ\dec.
+\end{equation}
+If $(Q',K',\dec',\tau',\enc')$ is another such factorization, there are unique bijections $\alpha:Q\to Q'$ and $\varphi:K\to K'$ with
+\[
+\alpha\circ\dec=\dec',\qquad\varphi\circ\tau=\tau'\circ\alpha,\qquad\enc'\circ\varphi=\enc.
+\]
+\end{theorem}
+\begin{proof}
+Existence follows by construction. Let $Q=X/{\sim_f}$ be the exact contraction of the single observation $f$ (Definition~\ref{def:compact}), with $\dec=\pi$. Let $K=f(X)$ and $\tau([x])=f(x)$; $\tau$ is well defined and injective by the definition of $\sim_f$, and onto by the definition of $f(X)$. Let $\enc$ be the inclusion $K\subseteq Y$. Then $\enc(\tau(\dec(x)))=f(x)$.
+
+For uniqueness, let $(Q',K',\dec',\tau',\enc')$ be another factorization. The composite $\enc'\circ\tau'$ is injective, so $\dec'(x)=\dec'(y)$ holds exactly when $f(x)=f(y)$, that is, when $\dec(x)=\dec(y)$. Hence $\alpha(\dec(x))=\dec'(x)$ defines an injective map. It is onto because $\dec'$ is onto, and unique because $\dec$ is onto. Put $\varphi=\tau'\circ\alpha\circ\tau^{-1}$, a bijection satisfying $\varphi\circ\tau=\tau'\circ\alpha$; since $\tau$ is a bijection, this equation determines $\varphi$. Every $k\in K$ is $\tau(\dec(x))$ for some $x$, and
+\[
+\enc'(\varphi(k))=\enc'(\tau'(\alpha(\dec(x))))=\enc'(\tau'(\dec'(x)))=f(x)=\enc(k).\qedhere
+\]
+\end{proof}
+
+In the language of Section 2, $\dec$ is the minimal retained boundary of the observation $f$, and Theorem T4(d) is the uniqueness of $Q$. The computational cost of $f$ is the length of the retained boundary of $\tau$, written as a trit key.
+
+\begin{definition}[Cost]\label{def:cost}
+Let $f$ have a finite range of $m\ge1$ values. Its cost is $\cost(f)=\clog m$.
+\end{definition}
+
+\begin{theorem}[Cost is the length of the trit key]{T21}
+Let $f:X\to Y$ have a finite range of $m\ge1$ values.
+\begin{enumerate}
+\item[(a)] There are $g:X\to\{0,1,2\}^{\cost(f)}$ and $h:\{0,1,2\}^{\cost(f)}\to Y$ with $f=h\circ g$.
+\item[(b)] If $f=h\circ g$ with $g:X\to M$ and $M$ finite, then $|M|\ge m$. In particular, if $M=\{0,1,2\}^L$, then $L\ge\cost(f)$.
+\item[(c)] Let $f_1:X_1\to Y_1$ and $f_2:X_2\to Y_2$ have finite nonempty ranges, and let $f_1\times f_2:X_1\times X_2\to Y_1\times Y_2$ be $(x_1,x_2)\mapsto(f_1(x_1),f_2(x_2))$. Then
+\[
+\cost(f_1\times f_2)\le\cost(f_1)+\cost(f_2)\le\cost(f_1\times f_2)+1.
+\]
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+(a) Put $L=\cost(f)$. Since $3^L\ge m$, numbering the values of $f$ by $0,\ldots,m-1$ and applying $u_L$ of Theorem T7 gives an injection $\iota:f(X)\to\{0,1,2\}^L$. Put $g=\iota\circ f$. Fix a value $y_0$ of $f$, which exists because $m\ge1$, and let $h(\kappa)=\iota^{-1}(\kappa)$ on the image of $\iota$ and $h(\kappa)=y_0$ elsewhere. Then $h(g(x))=f(x)$.
+
+(b) Each value $f(x)=h(g(x))$ lies in $h(g(X))$, so $h$ maps $g(X)$ onto $f(X)$ and $m\le|g(X)|\le|M|$. For $M=\{0,1,2\}^L$ this reads $3^L\ge m$, hence $L\ge\clog m$.
+
+(c) Let $m_1,m_2$ be the range sizes and $c_1,c_2$ the costs. The range of $f_1\times f_2$ is $f_1(X_1)\times f_2(X_2)$, with $m_1m_2$ elements; let $c_{12}$ be its cost. From $3^{c_1+c_2}\ge m_1m_2$, $c_{12}\le c_1+c_2$. If $c_1=0$, then $m_1=1$, $c_{12}=c_2$ and the right inequality holds; likewise if $c_2=0$. Otherwise $3^{c_1-1}<m_1$ and $3^{c_2-1}<m_2$, so $3^{c_{12}}\ge m_1m_2>3^{c_1+c_2-2}$. Hence $c_{12}>c_1+c_2-2$, that is, $c_1+c_2\le c_{12}+1$.
+\end{proof}
+
+The product in (c) is taken on the product of the domains. For the paired map $x\mapsto(f_1(x),f_2(x))$ on one domain, the left inequality still holds, because its range has at most $m_1m_2$ elements. The right inequality can fail: if $f_1=f_2$ has nine values, the paired map has nine values and cost $2$, while $\cost(f_1)+\cost(f_2)=4$.
+
+The last part of the Unifier compares straight segments with closed curves. Straight segments have positive Lyapunov exponent; closed curves of positive curvature are stable. Its exact content is the following four statements.
+
+\begin{theorem}[Straight segments]{T22}
+For $n\ge2$ let $T(x)=nx$ on $\mathbb R$, one positional digit read along a straight scale. Then $|T^t(x)-T^t(y)|=n^t|x-y|$ for all $x,y$ and $t\in\mathbb N$. For $x\ne y$ and $t\ge1$,
+\[
+\frac1t\log\frac{|T^tx-T^ty|}{|x-y|}=\log n>0.
+\]
+For every $\epsilon>0$ and every $x$ there are $y$ and $t$ with $|x-y|<\epsilon$ and $|T^tx-T^ty|\ge1$.
+\end{theorem}
+\begin{proof}
+By induction $T^t(x)=n^tx$, which gives the first identity and the exponent $\log(n^t)/t=\log n$, positive since $n>1$. For the last statement put $y=x+\epsilon/2$ and choose $t$ with $2^t\ge2/\epsilon$. Then $|T^tx-T^ty|=n^t\epsilon/2\ge2^t\epsilon/2\ge1$.
+\end{proof}
+
+\begin{theorem}[Closed curves]{T23}
+For $n\ge1$ let $\rho_n(\theta)=\rnd(n\theta)/n$, the reader of a closed dial with $n$ ticks. Then $\rho_n(\rho_n(\theta))=\rho_n(\theta)$ for every $\theta$; every tick $a/n$ with $a\in\mathbb Z$ is fixed; and $|\theta-a/n|<1/(2n)$ implies $\rho_n(\theta)=a/n$.
+\end{theorem}
+\begin{proof}
+For an integer $a$, $\rnd(a)=\lfloor a+\tfrac12\rfloor=a$, so $\rho_n(a/n)=a/n$. Every value of $\rho_n$ is a tick, which gives $\rho_n\circ\rho_n=\rho_n$. The last statement is Theorem T15(a).
+\end{proof}
+
+The linearization of the straight reader $T$ is multiplication by $n$, with logarithm $\log n>0$. The dial reader $\rho_n$ is constant on each open tolerance arc, so its linearization there is $0$. Since $\rnd(y+n)=\rnd(y)+n$, the reader commutes with a full turn, $\rho_n(\theta+1)=\rho_n(\theta)+1$. It is a retraction of the dial onto its ticks: every reading within the tolerance returns to its tick, and the tick is fixed.
+
+\begin{theorem}[A path has a compact exact quotient exactly when it closes]{T24}
+On $\mathbb Z$, the step $x\mapsto x+1$ has no periodic point and the states of an orbit are pairwise distinct, so the first $t$ states of an orbit have $t$ classes under the identity observation. On $\mathbb Z/n\mathbb Z$ with $n\ge1$, the $n$-fold step is the identity and an orbit has exactly $n$ states.
+\end{theorem}
+\begin{proof}
+The $t$-fold step is $x\mapsto x+t$, which differs from $x$ for $t\ge1$. The states $x+i$ and $x+j$ with $i<j$ differ by $j-i\ge1$. Under the identity observation each state is its own class. On $\mathbb Z/n\mathbb Z$ the $n$-fold step is $x\mapsto x+n=x$. The states $x,x+1,\ldots,x+n-1$ are pairwise distinct, because $0<j-i<n$ is not a multiple of $n$, and every later state repeats one of them.
+\end{proof}
+
+For an injective step on any set, a forward orbit with finitely many states closes: if $x_i=x_j$ with $i<j$, injectivity gives $x_0=x_{j-i}$.
+
+\begin{theorem}[Curvature]{T25}
+The dial with $n$ ticks at unit spacing is a circle of circumference $n$ and curvature $\kappa_n=2\pi/n$. Its tolerance in turns is
+\[
+\frac1{2n}=\frac{\kappa_n}{4\pi},
+\]
+which is positive for every $n$ and tends to $0$ as $n$ grows, the straight limit.
+\end{theorem}
+\begin{proof}
+A circle of circumference $n$ has radius $n/(2\pi)$ and curvature $2\pi/n$. The tolerance $1/(2n)$ is that of Theorem T23, and $(2\pi/n)/(4\pi)=1/(2n)$.
+\end{proof}
+
+\section{Special cases}
+Special cases are obtained by substituting the appropriate observation algebra.
+
+Fibonacci accumulation is pure trit summation along a closed path on pairs: each step is one addition, and the carries of an addition compose by the table of Theorem T9 (C5 below).
+\begin{theorem}[Fibonacci accumulation]{C1}
+Let $m\ge1$ and let $F_0=0$, $F_1=1$, $F_{n+2}=F_n+F_{n+1}$. On $(\mathbb Z/m\mathbb Z)^2$, the step $\phi(a,b)=(b,a+b)$ is a bijection with inverse $(c,d)\mapsto(d-c,c)$, and $\phi^n(0,1)=(F_n,F_{n+1})$ modulo $m$.
+\end{theorem}
+\begin{proof}
+$(b,a+b)\mapsto(a+b-b,b)=(a,b)$ and $(d-c,c)\mapsto(c,d-c+c)=(c,d)$. For the iterate, $\phi^0(0,1)=(F_0,F_1)$ and $\phi(F_n,F_{n+1})=(F_{n+1},F_{n+2})$.
+\end{proof}
+By the remark after Theorem T24, every orbit of $\phi$ closes; the Fibonacci numbers modulo $m$ are periodic.
+
+Segmented logarithms reduce every positive number to one depth interval.
+\begin{theorem}[Segmented logarithm]{C2}
+For real $x>0$ and an integer $e$ with $2^e\le x<2^{e+1}$, $\log_2x=e+\log_2(x/2^e)$ and $1\le x/2^e<2$.
+\end{theorem}
+\begin{proof}
+Dividing $2^e\le x<2^{e+1}$ by $2^e>0$ gives the bounds, and $\log_2x=\log_2(2^e\cdot x/2^e)=e+\log_2(x/2^e)$.
+\end{proof}
+A polynomial approximation of $\log_2$ on $[1,2)$, such as the cubic of a segmented logarithm, is applied after this exact reduction; its accuracy is not a statement of this paper.
+
+The impossible halfway root is the arithmetic prohibition of a quarter-integer square.
+\begin{theorem}[The impossible halfway root]{C3}
+For all $n,k\in\mathbb N$, $4n\ne(2k+1)^2$. Hence the square root of a natural number is never an integer plus one half.
+\end{theorem}
+\begin{proof}
+$4n$ is even and $(2k+1)^2=4k^2+4k+1$ is odd. If $\sqrt n=k+\tfrac12$, then $n=k^2+k+\tfrac14$ and $4n=(2k+1)^2$.
+\end{proof}
+
+\begin{theorem}[Dial systems]{C4}
+Dial systems are the Mordell instances: Theorem T14.
+\end{theorem}
+
+The carry table is the pressure field itself: it is the composition table $c$ of Theorem T9.
+\begin{theorem}[The carry table]{C5}
+In binary addition, a position with bits $(a,b)$ is the window $[\sor(a\land b),\ \sand(a\xor b)]$, and the carry out of any block of positions is the response of the concatenated window, top position first, to the carry into the block. For words $a$ and $b$ of $w$ bits and a carry in $c_0$, bit $i$ of $a+b+c_0$ is $a_i\xor b_i\xor c_i$ for $i<w$, and bit $w$ is $c_w$, where $c_i$ is the response of the window of positions $i-1,\ldots,0$ to $c_0$. The trit of position $(a,b)$ is $a+b$.
+\end{theorem}
+\begin{proof}
+The carry out of one position with carry in $R$ is $\lfloor(a+b+R)/2\rfloor$. It is $1$ for $a=b=1$, $R$ for $a\ne b$ and $0$ for $a=b=0$, which is $(a\land b)\lor((a\xor b)\land R)=F_{[\sor(a\land b),\sand(a\xor b)]}(R)$. The carry out of a block is the carry out of its top position applied to the carry out of the positions below it; by induction on the block and Theorem T9, it is the response of the concatenation. With $s_i=a_i\xor b_i\xor c_i$, the parity of $a_i+b_i+c_i$, and $c_{i+1}$ its carry, $a_i+b_i+c_i=s_i+2c_{i+1}$. Multiplying by $2^i$ and summing over $i<w$, the intermediate carries cancel and $a+b+c_0=\sum_{i<w}s_i2^i+2^wc_w$, so $s_i$ is bit $i$ of $a+b+c_0$ for $i<w$ and $c_w$ is bit $w$, because $\sum_{i<w}s_i2^i<2^w$. The rails of a position are $(F(1),F(0))=((a\land b)\lor(a\xor b),\ a\land b)=(a\lor b,\ a\land b)$, and $(a\lor b)+(a\land b)=a+b$.
+\end{proof}
+
+The three trits of a position, $0$, $1$ and $2$, are the kill, propagate and generate cases of carry look-ahead. By~\eqref{eq:column}, the retained trit of a position is $a+b=(a\xor b)+a\ot b$.
+
+No bulk enumeration enters any of these constructions.
+
+\section{Conclusion}
+At each pressure the inertia plane is one depth. The retained trit is the necessary and sufficient state of an ordered decision. The reverse lookup is the path from residues to the index. Every function factors through its exact contraction, and its cost is the length of its trit key. Every exact computation is a surface probe of this structure. The ocean remains below the plane.
+
+Several parts of this paper are established. Quotients by the kernel of an observation, and the minimal state of a sequential system under observation equivalence, are classical; the latter is Nerode-style minimisation~\cite{nerode}. Theorems T4 and T20 are their elementary form: T20 is the canonical factorization of a map through its image, a surjection followed by an injection, which is unique up to a unique bijection. The author's note on exact state contraction~\cite{esc} fixes the observation contract used here. The residue composition of Section 5 is the Chinese remainder theorem with coefficients supplied by a unit-fraction identity; Mordell studied systems of congruences~\cite{mordell}. The curve of Section 6 is Hilbert's~\cite{hilbert}. For carry chains the fork of Section 4 is the generate and propagate pair of carry look-ahead~\cite{weinberger}, and the composition of Theorem T9 is the associative operator of parallel prefix adders~\cite{brentkung}. For alternating windows the two normal forms of Theorem T10 are the alternating split of an AND-OR path and its dual, the standard device in the study of adder depth~\cite{grinchuk,brennerhermann}. The author's earlier count of sum-and-carry response functions treats cascaded addition~\cite{cascade}. The counting in Theorem T21 and the statements of Theorems T22 to T25 are elementary.
+
+The contribution of this paper is the single frame that holds these parts: the factorization~\eqref{eq:unifier} read as surface gauge, trit-key path and pressure inversion, with cost defined as the length of the trit key (Definition~\ref{def:cost}); the trit fork named as the retained state of every ordered decision, for windows of any shape (Theorems T8, T9 and T11); the tolerance of the table reader set against the straight scale (Theorems T15 and T16); and a formal proof of every theorem.
+
+\section{Executable verification}
+The standard-library script \texttt{verify.py} checks the finite content independently, with exact integer and rational arithmetic and the rounding of Definition~\ref{def:round}. It covers Theorems T5 to T7 for keys of length up to $6$; T8 to T10 on every window of length up to $12$ ($22{,}369{,}621$ windows), T9 on every concatenation of total length up to $12$, and T11 on all sixteen one-bit labellings; T12 to T14 on $751$ decompositions $1/N=\sum_i\varepsilon_i/n_i$ with $n_i\le30$, the general form of T12 on every pair of coefficients in $[-N,N)$ for $N\le24$, and the tree family for $n\le200$; T15 and T16 on rational grids; T17 to T19 for $k\le8$; T21 for range sizes up to $243$; T23 and T24 for $n\le64$; and C1, C3 and C5 on finite ranges. Run \texttt{python3 verify.py}; it prints one line per statement and exits with a nonzero status on any failure. These checks supplement the proofs.
+
+\section{Formal verification}
+Every theorem of this paper is proved in Lean~4.35.0 with Mathlib v4.35.0. Table~\ref{tab:lean} lists the declarations for each statement and their files in the companion directory \texttt{lean/}; \texttt{lake build Unifier} rebuilds all of them. A listed declaration uses no \texttt{sorry}, \texttt{admit}, new axiom or \texttt{native\_decide}, and \texttt{\#print axioms} reports only \texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound}.
+{\small
+\begin{longtable}{@{}l>{\raggedright\arraybackslash}p{0.60\textwidth}l@{}}
+\caption{Checked Lean declarations.}\label{tab:lean}\\
+\toprule
+Statement & Lean declarations & File in \texttt{lean/Unifier/}\\
+\midrule
+\endfirsthead
+\toprule
+Statement & Lean declarations & File in \texttt{lean/Unifier/}\\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+T1 & \texttt{hydrostatic\_linear} & \texttt{Inertia.lean}\\
+T2 & \texttt{hydrostatic\_unique\_level},\allowbreak\ \texttt{hydrostatic\_level\_eq} & \texttt{Inertia.lean}\\
+T3 & \texttt{trit\_keys\_card},\allowbreak\ \texttt{full\_level\_clog} & \texttt{Inertia.lean}\\
+T4 & \texttt{observationSetoid},\allowbreak\ \texttt{quotient\_projection\_exact},\allowbreak\ \texttt{quotient\_projection\_surjective},\allowbreak\ \texttt{factorBoundary},\allowbreak\ \texttt{factorBoundary\_spec},\allowbreak\ \texttt{factorBoundary\_unique},\allowbreak\ \texttt{factorBoundary\_surjective},\allowbreak\ \texttt{quotient\_finite},\allowbreak\ \texttt{quotient\_card\_le},\allowbreak\ \texttt{exactBoundaryEquiv},\allowbreak\ \texttt{exactBoundaryEquiv\_spec},\allowbreak\ \texttt{exactBoundaryEquiv\_unique} & \texttt{Contraction.lean}\\
+T5 & \texttt{nativeTensor\_one},\allowbreak\ \texttt{nativeTensor\_bit\_xor},\allowbreak\ \texttt{nativeTensor\_square},\allowbreak\ \texttt{nativeTensor\_half} & \texttt{Ternary.lean}\\
+T6 & \texttt{tritForkEquiv},\allowbreak\ \texttt{tritToRails\_left},\allowbreak\ \texttt{tritToRails\_right},\allowbreak\ \texttt{trit\_no\_forbidden\_corner} & \texttt{Ternary.lean}\\
+T7 & \texttt{base3KeyEquiv},\allowbreak\ \texttt{base3\_decode\_encode},\allowbreak\ \texttt{base3\_encode\_decode},\allowbreak\ \texttt{base3\_encode\_sum} & \texttt{TritKeys.lean}\\
+T8 & \texttt{response\_mono},\allowbreak\ \texttt{response\_fork},\allowbreak\ \texttt{windowTrit\_classes} & \texttt{Carry.lean}\\
+T9 & \texttt{response\_append},\allowbreak\ \texttt{windowTrit\_compose},\allowbreak\ \texttt{tritCompose\_assoc},\allowbreak\ \texttt{tritCompose\_left\_id},\allowbreak\ \texttt{tritCompose\_right\_id} & \texttt{Carry.lean}\\
+T10 & \texttt{response\_normal\_and},\allowbreak\ \texttt{response\_normal\_or} & \texttt{Carry.lean}\\
+T11 & \texttt{oneStage\_three},\allowbreak\ \texttt{oneStage\_surjective},\allowbreak\ \texttt{oneStage\_exact},\allowbreak\ \texttt{oneStage\_no\_bool\_boundary},\allowbreak\ \texttt{oneStageQuotEquiv},\allowbreak\ \texttt{oneStage\_class\_count} & \texttt{Carry.lean}\\
+T12 & \texttt{reverse\_lookup\_coefficient},\allowbreak\ \texttt{reverse\_lookup\_integer} & \texttt{Reverse.lean}\\
+T13 & \texttt{reverse\_lookup\_angle} & \texttt{Angle.lean}\\
+T14 & \texttt{zodiac\_reverse\_mod12},\allowbreak\ \texttt{successor\_reverse\_divisible},\allowbreak\ \texttt{successor\_reverse\_mod} & \texttt{Reverse.lean}\\
+T15 & \texttt{dial\_round\_tolerance},\allowbreak\ \texttt{uniform\_dial\_error},\allowbreak\ \texttt{round\_uniform\_dial},\allowbreak\ \texttt{reverse\_lookup\_from\_readings} & \texttt{Rounding.lean}\\
+T16 & \texttt{straight\_scale\_tolerance},\allowbreak\ \texttt{straight\_scale\_half\_tie} & \texttt{Rounding.lean}\\
+T17 & \texttt{hilbert\_bijOn},\allowbreak\ \texttt{hilbert\_mapsTo},\allowbreak\ \texttt{hilbert\_injOn},\allowbreak\ \texttt{hilbert\_surjOn} & \texttt{Hilbert.lean}\\
+T18 & \texttt{hilbert\_locality},\allowbreak\ \texttt{hilbert\_chebyshev} & \texttt{Hilbert.lean}\\
+T19 & \texttt{hilbert\_quarters},\allowbreak\ \texttt{hilbertH\_succ},\allowbreak\ \texttt{hilbert\_start},\allowbreak\ \texttt{hilbert\_end} & \texttt{Hilbert.lean}\\
+T20 & \texttt{unifier\_exists},\allowbreak\ \texttt{canonical\_iso},\allowbreak\ \texttt{unique\_iso},\allowbreak\ \texttt{unifier\_unique\_factorization} & \texttt{Factorization.lean}\\
+T21 & \texttt{trit\_cost\_factorization},\allowbreak\ \texttt{trit\_cost\_minimal},\allowbreak\ \texttt{range\_card\_le\_of\_factorization},\allowbreak\ \texttt{independent\_product\_tritCost},\allowbreak\ \texttt{correlated\_pairing\_counterexample} & \texttt{Cost.lean}\\
+T22 & \texttt{straight\_distance},\allowbreak\ \texttt{straight\_lyapunov},\allowbreak\ \texttt{straight\_lyapunov\_positive},\allowbreak\ \texttt{straight\_scale\_unstable} & \texttt{Straight.lean}\\
+T23 & \texttt{dial\_reader\_idempotent},\allowbreak\ \texttt{dial\_reader\_tick},\allowbreak\ \texttt{dial\_reader\_tolerance} & \texttt{Rounding.lean}\\
+T24 & \texttt{integer\_step\_iterate},\allowbreak\ \texttt{integer\_step\_no\_periodic},\allowbreak\ \texttt{integer\_orbit\_injective},\allowbreak\ \texttt{integer\_orbit\_prefix\_card},\allowbreak\ \texttt{integer\_orbit\_aperiodic},\allowbreak\ \texttt{modular\_orbit\_bijective},\allowbreak\ \texttt{modular\_state\_count},\allowbreak\ \texttt{modular\_step\_iterations},\allowbreak\ \texttt{modular\_step\_period} & \texttt{Dynamics.lean}\\
+T25 & \texttt{dial\_circumference},\allowbreak\ \texttt{dial\_curvature\_inverse\_radius},\allowbreak\ \texttt{dial\_curvature\_relation},\allowbreak\ \texttt{dial\_tolerance\_positive},\allowbreak\ \texttt{dial\_tolerance\_straight\_limit} & \texttt{Curvature.lean}\\
+C1 & \texttt{fibonacciStepEquiv},\allowbreak\ \texttt{fibonacci\_step\_bijective},\allowbreak\ \texttt{fibonacci\_accumulation} & \texttt{Fibonacci.lean}\\
+C2 & \texttt{segmented\_log\_two} & \texttt{SegmentedLog.lean}\\
+C3 & \texttt{impossible\_halfway\_root},\allowbreak\ \texttt{sqrt\_ne\_half\_integer} & \texttt{Special.lean}\\
+C4 & \texttt{zodiac\_reverse\_mod12},\allowbreak\ \texttt{successor\_reverse\_mod} & \texttt{Reverse.lean}\\
+C5 & \texttt{bitWindow\_response},\allowbreak\ \texttt{binary\_full\_adder},\allowbreak\ \texttt{binary\_block\_carry},\allowbreak\ \texttt{bitWindow\_trit},\allowbreak\ \texttt{bitsValue\_eq\_sum},\allowbreak\ \texttt{rippleCarry\_eq\_blockCarry},\allowbreak\ \texttt{binary\_word\_adder},\allowbreak\ \texttt{bitsValue\_lt},\allowbreak\ \texttt{rippleSum\_length},\allowbreak\ \texttt{rippleSum\_getD},\allowbreak\ \texttt{binary\_word\_adder\_digits} & \texttt{Carry.lean}\\
+\end{longtable}
+}
+
+\begin{thebibliography}{9}\raggedright
+\bibitem{mordell}
+L.~J. Mordell,
+\emph{Systems of congruences},
+Canad. Math. Bull. 16 (1973), 457--462.
+\bibitem{hilbert}
+D.~Hilbert,
+\emph{Über die stetige Abbildung einer Linie auf ein Flächenstück},
+Math. Ann. 38 (1891), 459--460.
+\bibitem{nerode}
+A.~Nerode,
+\emph{Linear automaton transformations},
+Proc. Amer. Math. Soc. 9 (1958), 541--544.
+\href{https://doi.org/10.1090/S0002-9939-1958-0135681-9}{doi:10.1090/S0002-9939-1958-0135681-9}.
+\bibitem{weinberger}
+A.~Weinberger and J.~L. Smith,
+\emph{A logic for high-speed addition},
+National Bureau of Standards Circular 591 (1958), 3--12.
+\bibitem{brentkung}
+R.~P. Brent and H.~T. Kung,
+\emph{A regular layout for parallel adders},
+IEEE Trans. Comput. C-31 (1982), 260--264.
+\bibitem{grinchuk}
+M.~I. Grinchuk,
+\emph{Sharpening an upper bound on the adder and comparator depths},
+J. Appl. Ind. Math. 3 (2009), no.~1, 61--67.
+\bibitem{brennerhermann}
+U.~Brenner and A.~Hermann,
+\emph{Faster carry bit computation for adder circuits with prescribed arrival times},
+ACM Trans. Algorithms 15 (2019), no.~4, Article 45.
+\href{https://doi.org/10.1145/3340321}{doi:10.1145/3340321}.
+\bibitem{esc}
+lmtlssss, \emph{Exact State Contraction: Definition and Notation}, Version 1.0, 2026.
+\href{https://doi.org/10.5281/zenodo.24054438}{doi:10.5281/zenodo.24054438}.
+\bibitem{cascade}
+lmtlssss{\authorsymbol 🜐}, \emph{Exact Counts of Sum-and-Carry Functions for Cascaded Addition}, 2026.
+\href{https://doi.org/10.5281/zenodo.23700193}{doi:10.5281/zenodo.23700193}.
+\end{thebibliography}
+\end{document}

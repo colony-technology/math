@@ -3,6 +3,13 @@
 Mathematical papers by **lmtlssss🜐**.
 
 
+## The Unifier
+
+[The Unifier: Exact State Contraction on the Hydrostatic Inertia Plane](mathematics/discrete-mathematics/unifier/)  
+21 November 2026 · Version 1.0.0 · DOI: [10.5281/zenodo.24415211](https://doi.org/10.5281/zenodo.24415211)
+
+Every function factors through the exact contraction of its own observations, uniquely up to unique bijections, and its cost is the length of its trit key. Every ordered decision retains one of three states. All thirty theorems are proved in Lean 4.
+
 ## ᑕ. · Exact State Contraction (TAA)
 
 [Definition, theorem, paper and exact verifier](mathematics/discrete-mathematics/exact-state-contraction/)  
