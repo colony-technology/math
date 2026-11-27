@@ -1,6 +1,6 @@
 # Exact Counting for a Boolean–Modular Equation with Bounded Tap Span
 
-**lmtlssss🜐 · 27 October 2026 · Version 1.0.0**
+**🜘lmtlssss🜐 · 27 October 2026 · Version 1.0.0**
 
 Mathematics / Discrete mathematics and algorithms
 

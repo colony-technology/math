@@ -1,6 +1,6 @@
 # The Unifier: Exact State Contraction on the Hydrostatic Inertia Plane
 
-**lmtlssss🜐 · 21 November 2026 · Version 1.0.0**
+**🜘lmtlssss🜐 · 21 November 2026 · Version 1.0.0**
 
 Mathematics / Discrete mathematics
 

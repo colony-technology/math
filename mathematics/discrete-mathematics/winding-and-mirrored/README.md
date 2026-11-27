@@ -1,6 +1,6 @@
 # Winding and Mirrored: Exact Two-Sheet Geometry on the Hilbert Ring
 
-**lmtlssss🜐 · 21 November 2026 · Version 1.0.0**
+**🜘lmtlssss🜐 · 21 November 2026 · Version 1.0.0**
 
 Mathematics / Discrete mathematics
 

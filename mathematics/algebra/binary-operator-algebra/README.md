@@ -1,6 +1,6 @@
 # Two Sparse Binary Operators with Optimal Generating Length
 
-**lmtlssss🜐 · 27 October 2026 · Version 1.0.0**
+**🜘lmtlssss🜐 · 27 October 2026 · Version 1.0.0**
 
 Mathematics / Algebra
 

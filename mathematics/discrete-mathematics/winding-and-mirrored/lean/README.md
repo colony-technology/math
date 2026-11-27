@@ -1,6 +1,6 @@
 # Lean 4 formalization
 
-**lmtlssss🜐 · 21 November 2026**
+**🜘lmtlssss🜐 · 21 November 2026**
 
 Every theorem of the paper, W1 to W11, is proved in Lean 4.35.0 with Mathlib v4.35.0. The nine files contain 158 theorems. None uses `sorry`, `native_decide` or an added axiom. `#print axioms` reports `propext`, `Classical.choice` and `Quot.sound` for 125 of them, `propext` and `Quot.sound` for 17, `propext` alone for 15, and no axiom for 1.
 

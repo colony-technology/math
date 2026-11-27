@@ -1,6 +1,6 @@
 # Exact nonnegative rank of a twelve-state composition tensor
 
-**lmtlssss🜐**  
+**🜘lmtlssss🜐**  
 26 October 2026 · Version 1.0.0  
 Mathematics / Algebra · MSC 2020: 15A69; 15B48, 20M20
 

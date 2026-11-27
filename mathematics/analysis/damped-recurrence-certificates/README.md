@@ -1,6 +1,6 @@
 # Sharp Observation Bounds and Minimal Peak Horizons for Damped Recurrences
 
-**lmtlssss🜐 · 2 November 2026 · Version 1.0.1**
+**🜘lmtlssss🜐 · 2 November 2026 · Version 1.0.1**
 DOI: [10.5281/zenodo.23900237](https://doi.org/10.5281/zenodo.23900237)
 
 Exact coefficient inequalities classify the stable conjugate-root recurrences with minimal uniform peak horizon two or three. A symmetric observation hexagon supplies necessity and sufficiency. An explicit rational boundary example has shortest uniform horizon three. Sharp observation constants, rational adaptive certificates and exact Stein sums accompany the new coefficient-region result.

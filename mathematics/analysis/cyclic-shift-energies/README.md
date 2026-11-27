@@ -1,6 +1,6 @@
 # Cyclic-Shift Energies: Minimal State and Cyclotomic Gaps
 
-**lmtlssss🜐 · 2 November 2026 · Version 1.0.0**
+**🜘lmtlssss🜐 · 2 November 2026 · Version 1.0.0**
 DOI: [10.5281/zenodo.23897127](https://doi.org/10.5281/zenodo.23897127)
 
 A cyclotomic divisibility criterion decides equality in an integer-occupancy spectral bound. At prime periods, algebraic norms yield a quantitative positive gap for nonflat spectra. The bound is attained at exactly five occupancies in a complete 210-state example. Minimal linear state and retained-potential identities supply the representation framework.

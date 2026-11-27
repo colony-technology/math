@@ -1,6 +1,6 @@
 # Affine Fibers and a Fibonacci Bound for Boolean–Modular Inversion
 
-**lmtlssss🜐 · 27 October 2026 · Version 1.0.0**
+**🜘lmtlssss🜐 · 27 October 2026 · Version 1.0.0**
 
 Mathematics / Discrete mathematics
 

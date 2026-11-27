@@ -1,6 +1,6 @@
 # Exact State Complexity of Two-Stage Addition
 
-**lmtlssss🜐 · 27 October 2026 · Version 1.0.0**
+**🜘lmtlssss🜐 · 27 October 2026 · Version 1.0.0**
 
 Mathematics / Discrete mathematics
 

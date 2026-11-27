@@ -1,6 +1,6 @@
 # Lean 4 formalization
 
-**lmtlssss🜐 · 21 November 2026**
+**🜘lmtlssss🜐 · 21 November 2026**
 
 Every numbered result of the paper is proved in Lean 4.35.0 with Mathlib v4.35.0. The map is the paper's map on `BitVec w`:
 

@@ -1,6 +1,6 @@
 # Ordered Carry Frontiers for Parallel Addition
 
-**lmtlssss🜐 · 27 October 2026 · Version 1.0.0**
+**🜘lmtlssss🜐 · 27 October 2026 · Version 1.0.0**
 
 Mathematics / Arithmetic automata and exact counting
 
