@@ -1,6 +1,6 @@
 # mathematics
 
-mathematical papers and lean 4 proofs by **lmtlssss🜐**.
+mathematical papers and lean 4 proofs by **🜘lmtlssss🜐**.
 
 
 ## winding and mirrored
