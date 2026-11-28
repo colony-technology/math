@@ -1,10 +1,10 @@
 # Winding and Mirrored: Exact Two-Sheet Geometry on the Hilbert Ring
 
-**🜘lmtlssss🜐 · 21 November 2026 · Version 1.0.0**
+**🜘lmtlssss🜐 · 28 November 2026 · Version 1.1.0**
 
 Mathematics / Discrete mathematics
 
-[Paper](https://github.com/colony-technology/math/releases/download/winding-and-mirrored-v1.0.0/paper.pdf) · [DOI](https://doi.org/10.5281/zenodo.24417767)
+[Paper](https://github.com/colony-technology/math/releases/download/winding-and-mirrored-v1.0.0/paper.pdf) · [DOI](https://doi.org/10.5281/zenodo.24618375)
 
 The Hilbert map of order k and its mirror image join into one closed Hamiltonian cycle of the periodic 2^(k+1) × 2^k rectangle. The first sheet is traversed forward and the mirrored sheet backward. Every cell occurs once, every step is a unit step, and for every k ≥ 1 the cycle winds once around the periodic direction. The mirror carries the cycle onto its reversal, which winds once in the opposite sense.
 
@@ -42,6 +42,6 @@ The native Blender scene shows Theorem W11 as a lattice of dots. Row 0 is the cu
 
 ## Scope
 
-The general statements are proved in the manuscript and checked in Lean, and the executable checks supplement those proofs. The paper names the established parts: Hilbert's curve and Moore's closed variant of it, the two-chart potentials of the Wu–Yang form of the Dirac monopole, the dihedral group, the vanishing sum of the divergence of an edge field, and the double spiral as the image of a logarithmic spiral under a Möbius map. The charged corners are what the honeycomb artificial spin ice of Ladak, Read, Perkins, Cohen and Branford shows. Division modulo 97 is the task of "Are UFOs Real? Introducing Unified Factored Organizers" (arXiv:2611.11862). The paper adds the two-sheet ring as a closed Hamiltonian cycle with winding one for every size, built from the Hilbert map and its mirror. It reads the mirror as the reversal of the traversal, on the grid and on the smooth curve. It counts the sign-mirror orbits for every odd prime, and every theorem has a Lean proof. A physical magnetic monopole is not established. The ring is not a compression theorem. The names torsion and drive denote mirror parity and assert no physical law.
+The general statements are proved in the manuscript and checked in Lean, and the executable checks supplement those proofs. The paper builds on Hilbert's curve (Hilbert, 1891), Moore's closed variant (Moore, 1900), the two-chart Wu–Yang potentials for the Dirac monopole (Wu & Yang, 1975, doi:10.1103/PhysRevD.12.3845), the dihedral group of order 24, graph-divergence conservation, and the loxodromic double spiral as the Möbius image of a logarithmic spiral (Needham, 1997, ISBN 978-0-19-853447-1). The charged corners are what the honeycomb artificial spin ice of Ladak, Read, Perkins, Cohen and Branford shows. Division modulo 97 is the task of "Are UFOs Real? Introducing Unified Factored Organizers" (arXiv:2611.11862). The paper adds the two-sheet ring as a closed Hamiltonian cycle with winding one for every size, built from the Hilbert map and its mirror. It reads the mirror as the reversal of the traversal, on the grid and on the smooth curve. It counts the sign-mirror orbits for every odd prime, and every theorem has a Lean proof.
 
 The paper, figure and data are licensed CC BY 4.0, and the executable source MIT; see `LICENSE.md`. Cite the paper with `CITATION.cff` or `CITATION.bib`.

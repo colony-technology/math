@@ -18,4 +18,4 @@ Failure modes:
 
 Three mutations run inside the script on every invocation: the second sheet traversed forward, the first Hilbert quarter left untransposed, and the x step taken as a plain difference. Each makes the corresponding check fail, and the script reports a failure if one of them passes.
 
-The public replay uses Python's standard library. It reports exact equality on the stated finite ranges and makes no claim about speed. General validity follows from the proofs.
+The public replay uses Python's standard library. It reports exact equality on the stated finite ranges. General validity follows from the proofs.
