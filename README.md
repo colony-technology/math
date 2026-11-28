@@ -6,21 +6,21 @@ mathematical papers and lean 4 proofs by **🜘lmtlssss🜐**.
 ## winding and mirrored
 
 [Winding and Mirrored: Exact Two-Sheet Geometry on the Hilbert Ring](mathematics/discrete-mathematics/winding-and-mirrored/)  
-21 November 2026 · Version 1.0.0 · DOI: [10.5281/zenodo.24417767](https://doi.org/10.5281/zenodo.24417767)
+28 November 2026 · Version 1.1.0 · DOI: [10.5281/zenodo.24618375](https://doi.org/10.5281/zenodo.24618375)
 
 The Hilbert map and its mirror image join into one closed Hamiltonian cycle of the periodic rectangle, which winds once around the periodic direction; the mirror carries it onto its reversal. On this ring a vector field splits into torsion, drive and a retained global component, and a pulse across the seam has divergence +q on one sheet and −q on the other. All eleven theorems are proved in Lean 4.
 
 ## the unifier
 
 [The Unifier: Exact State Contraction on the Hydrostatic Inertia Plane](mathematics/discrete-mathematics/unifier/)  
-21 November 2026 · Version 1.0.0 · DOI: [10.5281/zenodo.24415211](https://doi.org/10.5281/zenodo.24415211)
+28 November 2026 · Version 1.1.0 · DOI: [10.5281/zenodo.24618372](https://doi.org/10.5281/zenodo.24618372)
 
 Every function factors through the exact contraction of its own observations, uniquely up to unique bijections, and its cost is the length of its trit key. Every ordered decision retains one of three states. All thirty theorems are proved in Lean 4.
 
 ## ᑕ. · exact state contraction (taa)
 
 [Definition, theorem, paper and exact verifier](mathematics/discrete-mathematics/exact-state-contraction/)  
-8 November 2026 · Version 1.0.0 · DOI: [10.5281/zenodo.24054438](https://doi.org/10.5281/zenodo.24054438)
+28 November 2026 · Version 1.1.0 · DOI: [10.5281/zenodo.24618368](https://doi.org/10.5281/zenodo.24618368)
 
 An observation-relative state quotient preserves finite traces. Retained affine costs compose with their complete cross-terms. The paper proposes ᑕ. as a term for the exact contraction contract.
 
@@ -34,56 +34,56 @@ The nonnegative rank of a specified twelve-element monoid's composition tensor i
 ## discrete mathematics
 
 [A three-bit boundary for cyclic Boolean–modular inversion](mathematics/discrete-mathematics/three-bit-cyclic-inversion/)  
-27 October 2026 · Version 1.0.0
+28 November 2026 · Version 1.1.0
 
 Three initial bits determine every preimage of a cyclic Boolean–modular map. The complete inverse uses at most eight boundary assignments and 8w local bit updates. An explicit periodic family proves the eight-preimage bound sharp.
 
 ## twenty signed products
 
 [Twenty Signed Products for a Twelve-State Composition Tensor](mathematics/algebra/twenty-signed-products/)  
-27 October 2026 · Version 1.0.0
+28 November 2026 · Version 1.1.0
 
-An explicit twenty-term signed construction for the twelve-state tensor. The real rank lies between 18 and 20. The exact nonnegative tensor-power rank is 35^q, and the signed construction uses at most 20^q products. DOI: [10.5281/zenodo.23695066](https://doi.org/10.5281/zenodo.23695066).
+An explicit twenty-term signed construction for the twelve-state tensor. The real rank lies between 18 and 20. The exact nonnegative tensor-power rank is 35^q, and the signed construction uses at most 20^q products. DOI: [10.5281/zenodo.24618344](https://doi.org/10.5281/zenodo.24618344).
 
 ## exact counting
 
 [Exact Counting for a Boolean–Modular Equation with Bounded Tap Span](mathematics/discrete-mathematics/bounded-tap-span-counting/)  
-27 October 2026 · Version 1.0.0 · DOI: [10.5281/zenodo.23697063](https://doi.org/10.5281/zenodo.23697063)
+28 November 2026 · Version 1.1.0 · DOI: [10.5281/zenodo.24618362](https://doi.org/10.5281/zenodo.24618362)
 
 A fixed tap span gives a finite nonlinear frontier for exact count-and-witness solving. The manuscript proves the state bound and cyclic closure, with a 256-bit example containing 5,784,112,988,160 solutions.
 
 ## affine inverse fibers
 
 [Affine Fibers and a Fibonacci Bound for Boolean–Modular Inversion](mathematics/discrete-mathematics/affine-carry-inversion/)  
-27 October 2026 · Version 1.0.0 · DOI: [10.5281/zenodo.23697726](https://doi.org/10.5281/zenodo.23697726)
+28 November 2026 · Version 1.1.0 · DOI: [10.5281/zenodo.24618357](https://doi.org/10.5281/zenodo.24618357)
 
 For any invertible binary-linear map, the complete Boolean–modular inverse is a disjoint union of affine cells. Two carry automata give a Fibonacci signature bound and exact one-cell families.
 
 ## exact arithmetic states
 
 [Exact State Complexity of Two-Stage Addition](mathematics/discrete-mathematics/two-stage-addition/)  
-27 October 2026 · Version 1.0.0 · DOI: [10.5281/zenodo.23698617](https://doi.org/10.5281/zenodo.23698617)
+28 November 2026 · Version 1.1.0 · DOI: [10.5281/zenodo.24618293](https://doi.org/10.5281/zenodo.24618293)
 
 Three fixed radix-B operands define exactly 5B-4 complete two-carry response functions. Explicit normal forms attain the optimal fixed-length code, with a 35-bit code for 32-bit words and a distinct 42-bit independently queryable byte-stage contract.
 
 ## cascaded sum-and-carry functions
 
 [Exact Counts of Sum-and-Carry Functions for Cascaded Addition](mathematics/discrete-mathematics/cascaded-sum-carry/)  
-27 October 2026 · Version 1.0.0 · DOI: [10.5281/zenodo.23700193](https://doi.org/10.5281/zenodo.23700193)
+28 November 2026 · Version 1.1.0 · DOI: [10.5281/zenodo.24618367](https://doi.org/10.5281/zenodo.24618367)
 
 An exact all-stage, arbitrary-radix count and constructive minimum-length function code. Three 32-bit additions retain every incoming-carry response in exactly 36 bits.
 
 ## matrix algebras
 
 [Two Sparse Binary Operators with Optimal Generating Length](mathematics/algebra/binary-operator-algebra/)  
-27 October 2026 · Version 1.0.0 · DOI: [10.5281/zenodo.23701587](https://doi.org/10.5281/zenodo.23701587)
+28 November 2026 · Version 1.1.0 · DOI: [10.5281/zenodo.24618340](https://doi.org/10.5281/zenodo.24618340)
 
 Two sparse binary operators span the full 32-by-32 matrix algebra with products of length at most ten. Ten is the minimum possible bound. A polynomial rank-one identity gives a second constructive proof.
 
 ## arithmetic automata
 
 [Ordered Carry Frontiers for Parallel Addition](mathematics/discrete-mathematics/shared-input-carry-frontiers/)  
-27 October 2026 · Version 1.0.0 · DOI: [10.5281/zenodo.23702847](https://doi.org/10.5281/zenodo.23702847)
+28 November 2026 · Version 1.1.0 · DOI: [10.5281/zenodo.24618369](https://doi.org/10.5281/zenodo.24618369)
 
 Shared-input sums have a sharp ordered carry frontier of at most m+1 states. Exact residual minimality and a linear-layer construction give an exact counter and least witness for arbitrary input and output bit masks.
 
@@ -97,7 +97,7 @@ A cyclotomic divisibility criterion decides equality in an integer-occupancy spe
 
 ### robust amplitude elimination and exact lattice-phase selection
 
-[Paper and exact source](mathematics/analysis/homogeneous-amplitude-elimination/README.md) · [DOI](https://doi.org/10.5281/zenodo.23897131) · [Release](https://github.com/lmtlssss/math/releases/tag/homogeneous-amplitude-elimination-v1.0.0)
+[Paper and exact source](mathematics/analysis/homogeneous-amplitude-elimination/README.md) · [DOI](https://doi.org/10.5281/zenodo.24618350) · [Release](https://github.com/lmtlssss/math/releases/tag/homogeneous-amplitude-elimination-v1.0.0)
 
 A complete exact selection law for a translating common lattice reduces finite robust designs to residue cells and affine envelopes. It gives rational selection probabilities, expected optima and boundary decisions. A four-design example separates the continuous winner from the phase-selection probabilities. A second theorem proves persistent reversal under arbitrarily fine lattice refinement.
 
@@ -109,7 +109,7 @@ Exact coefficient inequalities classify the stable conjugate-root recurrences wi
 
 ### affine cycles: exact cut defects and minimal retained state
 
-[Paper and exact source](mathematics/analysis/affine-cycles/README.md) · [DOI](https://doi.org/10.5281/zenodo.23931722) · [Release](https://github.com/lmtlssss/math/releases/tag/affine-cycles-v1.0.0)
+[Paper and exact source](mathematics/analysis/affine-cycles/README.md) · [DOI](https://doi.org/10.5281/zenodo.24618347) · [Release](https://github.com/lmtlssss/math/releases/tag/affine-cycles-v1.0.0)
 
 A transported cyclic cut changes the accumulated affine cost by the prefix-cost row applied to the full-cycle displacement. Exact rank formulas give the minimum linear summaries for all cut defects and all transported cut totals. An affine consistency criterion includes cut-invariant cycles without fixed points. Polynomial derivative coefficients extend the minimum-state result.
 
@@ -118,6 +118,6 @@ A transported cyclic cut changes the accumulated affine cost by the prefix-cost 
 Each file is the full **3840 × 2705** native PNG, also archived on Zenodo.
 
 - [Cyclic-Shift Energies: Minimal State and Cyclotomic Gaps / full 4k png](mathematics/analysis/cyclic-shift-energies/figures/00-cover-4k.png) · [Zenodo](https://doi.org/10.5281/zenodo.23897127)
-- [Robust Amplitude Elimination and Exact Lattice-Phase Selection / full 4k png](mathematics/analysis/homogeneous-amplitude-elimination/figures/00-cover-4k.png) · [Zenodo](https://doi.org/10.5281/zenodo.23897131)
+- [Robust Amplitude Elimination and Exact Lattice-Phase Selection / full 4k png](mathematics/analysis/homogeneous-amplitude-elimination/figures/00-cover-4k.png) · [Zenodo](https://doi.org/10.5281/zenodo.24618350)
 - [Sharp Observation Bounds and Minimal Peak Horizons for Damped Recurrences / full 4k png](mathematics/analysis/damped-recurrence-certificates/figures/00-cover-4k.png) · [Zenodo](https://doi.org/10.5281/zenodo.23900237)
-- [Affine Cycles: Exact Cut Defects and Minimal Retained State / full 4k png](mathematics/analysis/affine-cycles/figures/00-cover-4k.png) · [Zenodo](https://doi.org/10.5281/zenodo.23931722)
+- [Affine Cycles: Exact Cut Defects and Minimal Retained State / full 4k png](mathematics/analysis/affine-cycles/figures/00-cover-4k.png) · [Zenodo](https://doi.org/10.5281/zenodo.24618347)
