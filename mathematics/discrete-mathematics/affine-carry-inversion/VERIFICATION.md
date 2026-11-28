@@ -12,10 +12,9 @@ Python 3 on the native cloud host returned these results:
 - The figure's five cells contain exactly 17 distinct eight-bit solutions.
 
 Every comparison passed. `evidence/verification.json` contains the maps, counts,
-examples, certificate bases and actual execution time. Its timings describe
-verification, not a performance claim for the inverse algorithm.
+examples, certificate bases and actual execution time. Its recorded execution times measure the verification suite in verify.py.
 
 The complete general proof is in `paper.tex`. Finite comparisons support the
-implementation. They do not replace the proof or establish algorithmic priority.
+implementation.
 The historical source was independently replayed before this publication. Its
 old timings were not presented as new measurements.

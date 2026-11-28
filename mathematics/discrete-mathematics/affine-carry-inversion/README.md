@@ -1,10 +1,10 @@
 # Affine Fibers and a Fibonacci Bound for Boolean–Modular Inversion
 
-**🜘lmtlssss🜐 · 27 October 2026 · Version 1.0.0**
+**🜘lmtlssss🜐 · 28 November 2026 · Version 1.1.0**
 
 Mathematics / Discrete mathematics
 
-[Paper](https://github.com/lmtlssss/math/releases/download/affine-carry-note-v1.0.0/paper.pdf) · [DOI](https://doi.org/10.5281/zenodo.23697726)
+[Paper](https://github.com/lmtlssss/math/releases/download/affine-carry-note-v1.0.0/paper.pdf) · [DOI](https://doi.org/10.5281/zenodo.24618357)
 
 For any invertible binary-linear map L on w-bit words, the complete inverse of
 L(a+D)+L(a)=S modulo 2^w is a disjoint union of affine binary cells. Each cell
@@ -37,6 +37,6 @@ full 32-bit reflection examples and wide certificates through 512 bits.
 `verify.py` uses an independent bit-by-bit forward oracle. `evidence/figure.json`
 contains exact cells, signatures and members. `visual/build_scene.py` builds the
 native Blender scene. The proof concerns compact output; listing every solution
-adds a cost proportional to the output size. Signature counts are not speed ratios.
+adds a cost proportional to the output size.
 
 Paper, figure and data: CC BY 4.0. Code: MIT. See `LICENSE.md`.
