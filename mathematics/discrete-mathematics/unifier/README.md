@@ -1,10 +1,10 @@
 # The Unifier: Exact State Contraction on the Hydrostatic Inertia Plane
 
-**🜘lmtlssss🜐 · 21 November 2026 · Version 1.0.0**
+**🜘lmtlssss🜐 · 28 November 2026 · Version 1.1.0**
 
 Mathematics / Discrete mathematics
 
-[Paper](https://github.com/colony-technology/math/releases/download/unifier-v1.0.0/paper.pdf) · [DOI](https://doi.org/10.5281/zenodo.24415211)
+[Paper](https://github.com/colony-technology/math/releases/download/unifier-v1.0.0/paper.pdf) · [DOI](https://doi.org/10.5281/zenodo.24618372)
 
 Every function f factors as f = enc ∘ τ ∘ dec. Here dec is a surjection onto the exact contraction of f's own observations, τ is a bijection onto the retained keys, and enc is an injection. Any two such factorizations differ by unique bijections. The cost of f is the length of the trit key of its values, ⌈log₃ m⌉ for m values. That length is necessary and sufficient, and for a product of two functions it is additive up to one trit.
 
@@ -43,6 +43,6 @@ The native Blender scene shows circles that all touch at one point and shrink to
 
 ## Scope
 
-The general statements are proved in the manuscript and checked in Lean, and the executable checks supplement those proofs. The paper names the established parts: quotient constructions and Nerode-style minimisation, the canonical factorization of a map through its image, the Chinese remainder composition, Hilbert's curve, generate and propagate in carry look-ahead, and the alternating split of AND-OR paths. Its contribution is the frame that holds them. The factorization is read as surface gauge, trit-key path and pressure inversion, and cost is the length of the trit key. The trit fork is the retained state of every ordered decision, for windows of any shape. The table reader is set against the straight scale. Every theorem has a Lean proof.
+The general statements are proved in the manuscript and checked in Lean, and the executable checks supplement those proofs. The paper builds on Nerode-style quotient minimisation (Nerode, 1958, doi:10.1090/S0002-9939-1958-0135681-9), canonical image factorization, Chinese remainder composition (Mordell, 1973), Hilbert's curve (Hilbert, 1891), carry look-ahead generate/propagate and parallel prefix composition (Weinberger & Smith, 1958; Brent & Kung, 1982), and alternating AND-OR path splits (Grinchuk, 2009; Brenner & Hermann, 2019, doi:10.1145/3340321). This paper unifies these constructions in a single frame: The factorization is read as surface gauge, trit-key path and pressure inversion, and cost is the length of the trit key. The trit fork is the retained state of every ordered decision, for windows of any shape. The table reader is set against the straight scale. Every theorem has a Lean proof.
 
 The paper, figure and data are licensed CC BY 4.0, and the executable source MIT; see `LICENSE.md`. Cite the paper with `CITATION.cff` or `CITATION.bib`.

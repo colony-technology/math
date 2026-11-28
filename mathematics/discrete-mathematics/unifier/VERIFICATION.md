@@ -18,4 +18,4 @@ Failure modes:
 
 A mutation of the carry table, of the rounding rule, or of the first Hilbert quarter makes the corresponding check fail.
 
-The public replay uses Python's standard library. It reports exact equality on the stated finite ranges and makes no claim about speed. General validity follows from the proofs.
+The public replay uses Python's standard library. It reports exact equality on the stated finite ranges. General validity follows from the proofs.
