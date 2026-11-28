@@ -1,7 +1,7 @@
 # Robust Amplitude Elimination and Exact Lattice-Phase Selection
 
-**🜘lmtlssss🜐 · 2 November 2026 · Version 1.0.0**
-DOI: [10.5281/zenodo.23897131](https://doi.org/10.5281/zenodo.23897131)
+**🜘lmtlssss🜐 · 28 November 2026 · Version 1.1.0**
+DOI: [10.5281/zenodo.24618350](https://doi.org/10.5281/zenodo.24618350)
 
 A complete exact selection law for a translating common lattice reduces finite robust designs to residue cells and affine envelopes. It gives rational selection probabilities, expected optima and boundary decisions. A four-design example separates the continuous winner from the phase-selection probabilities. A second theorem proves persistent reversal under arbitrarily fine lattice refinement.
 

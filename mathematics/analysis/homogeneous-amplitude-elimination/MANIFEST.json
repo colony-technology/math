@@ -2,7 +2,7 @@
   "schema": "mathematics.source.v1",
   "title": "Robust Amplitude Elimination and Exact Lattice-Phase Selection",
   "doi": "10.5281/zenodo.23897131",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "files": [
     {
       "path": "CITATION.bib",

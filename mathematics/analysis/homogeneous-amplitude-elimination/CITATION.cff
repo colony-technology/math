@@ -3,8 +3,8 @@ message: "Please cite the accompanying mathematical preprint."
 title: "Robust Amplitude Elimination and Exact Lattice-Phase Selection"
 authors:
   - name: "🜘lmtlssss🜐"
-version: 1.0.0
-date-released: 2026-11-02
-doi: 10.5281/zenodo.23897131
+version: 1.1.0
+date-released: 2026-11-28
+doi: 10.5281/zenodo.24618350
 url: https://github.com/lmtlssss/math/tree/main/mathematics/analysis/homogeneous-amplitude-elimination
 license: CC-BY-4.0
