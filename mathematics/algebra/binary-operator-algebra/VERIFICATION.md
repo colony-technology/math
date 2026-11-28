@@ -18,6 +18,4 @@ The historical source basis was read and compared before this publication.
 The explicit polynomial certificate is a separate derivation from this pass.
 `evidence/verification.json` contains the observed results. The cloud build
 produces a separate `evidence/cloud-verification.json` receipt. The general
-proof and finite certificate interpretation are in the manuscript. The
-execution is internal exact verification, not external replication or formal
-proof-kernel acceptance. Execution time is a verifier time, not a speed claim.
+proof and finite certificate interpretation are in the manuscript.

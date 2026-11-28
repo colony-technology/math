@@ -19,5 +19,4 @@ These basis checks prove equality on every input vector. Also reject a
 modified polynomial, vector, inverse, or duplicated basis word. Preserve the
 original source record and mark new certificates separately.
 
-The manuscript supplies the mathematical argument. Exact finite calculations
-support its explicit certificates; no formal proof-kernel acceptance is claimed.
+The manuscript supplies the mathematical argument. Exact finite arithmetic in verify.py verifies all 1,024 entries of the rank-one identity and all four inverse products in Proposition 3, all 1,024 basis words and 2,047 words through length ten in Theorem 1, and full-map synthesis of all 1,024 elementary matrices.

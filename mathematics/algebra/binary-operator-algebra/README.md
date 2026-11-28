@@ -1,10 +1,10 @@
 # Two Sparse Binary Operators with Optimal Generating Length
 
-**🜘lmtlssss🜐 · 27 October 2026 · Version 1.0.0**
+**🜘lmtlssss🜐 · 28 November 2026 · Version 1.1.0**
 
 Mathematics / Algebra
 
-[Paper](https://github.com/lmtlssss/math/releases/download/binary-algebra-note-v1.0.0/paper.pdf) · [DOI](https://doi.org/10.5281/zenodo.23701587)
+[Paper](https://github.com/lmtlssss/math/releases/download/binary-algebra-note-v1.0.0/paper.pdf) · [DOI](https://doi.org/10.5281/zenodo.24618340)
 
 On 32-bit vectors over F2, set
 
@@ -52,8 +52,6 @@ additional basis directions at length ten.
 
 The general rank-one criterion and word-length framework are established
 mathematics. This paper records a specific sparse pair and its exact
-certificates. The result is a linear-algebra statement, not a running-time or
-energy measurement. It preserves the distinction between linear maps and
-nonlinear computations.
+certificates.
 
 Paper, figure and data: CC BY 4.0. Executable source: MIT. See `LICENSE.md`.
