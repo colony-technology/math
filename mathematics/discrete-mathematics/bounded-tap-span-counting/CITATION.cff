@@ -4,8 +4,8 @@ type: article
 title: "Exact Counting for a Boolean–Modular Equation with Bounded Tap Span"
 authors:
   - name: "🜘lmtlssss🜐"
-version: 1.0.0
-date-released: 2026-10-27
-doi: 10.5281/zenodo.23697063
+version: 1.1.0
+date-released: 2026-11-28
+doi: 10.5281/zenodo.24618362
 url: "https://github.com/lmtlssss/math/tree/main/mathematics/discrete-mathematics/bounded-tap-span-counting"
 license: CC-BY-4.0

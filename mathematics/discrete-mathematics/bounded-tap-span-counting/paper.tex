@@ -70,7 +70,7 @@ Mouha et al. developed the differential analysis of S-functions
 \cite{mouha2011}; Velichkov et al. treated rotation within that framework
 \cite{velichkov2011}. The contribution here is an explicit sufficient state
 for \eqref{eq:fiber}, together with its boundary conditions and a parameterized
-counting bound. The proof does not claim a new general dynamic-programming principle.
+counting bound.
 
 \Needspace{11\baselineskip}
 \begin{theorem}\label{thm:main}
@@ -309,8 +309,7 @@ Lemmas~\ref{lem:transition}--\ref{lem:frontier} and the state count.
 The implementations enforce declared resource limits. An interrupted search
 returns an incomplete result, rather than an empty fiber.
 The state bound specifies combinatorial work; the bit-operation bound also charges exact integer arithmetic.
-The specific sufficient state and carry elimination are the mathematical content;
-finite-state arithmetic counting itself has the prior literature cited above.
+Building on the S-function and finite-state arithmetic counting framework of Mouha et al.~\cite{mouha2011} and Velichkov et al.~\cite{velichkov2011}, this paper constructs the explicit sufficient frontier state and carry elimination for~\eqref{eq:fiber}.
 
 \noindent\textit{Reproducibility.}
 The versioned release supplies the full code, exact example, verification receipt,

@@ -8,4 +8,4 @@ The 256-bit example returns exactly 5,784,112,988,160 solutions. Its native solv
 
 The replay includes zero and all-one operands, empty fibers, cyclic index changes, shift truncation, discarded final carries, and consistent tail-carry closure. Counts use arbitrary precision. A resource cap is an incomplete run, not a zero count.
 
-`evidence/verification.json` records the complete comparisons and source digests. This is internal cross-code verification, not an assertion of external peer review or formal verification of the compilers.
+`evidence/verification.json` records the complete comparisons and source digests.

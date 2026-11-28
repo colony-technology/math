@@ -1,10 +1,10 @@
 # Exact Counting for a Boolean–Modular Equation with Bounded Tap Span
 
-**🜘lmtlssss🜐 · 27 October 2026 · Version 1.0.0**
+**🜘lmtlssss🜐 · 28 November 2026 · Version 1.1.0**
 
 Mathematics / Discrete mathematics and algorithms
 
-[Paper](https://github.com/lmtlssss/math/releases/download/short-frontier-note-v1.0.0/paper.pdf) · [DOI](https://doi.org/10.5281/zenodo.23697063)
+[Paper](https://github.com/lmtlssss/math/releases/download/short-frontier-note-v1.0.0/paper.pdf) · [DOI](https://doi.org/10.5281/zenodo.24618362)
 
 For `L_w(x) = ROR_r1(x) XOR ROR_r2(x) XOR SHR_s(x)`, solve
 `L_w(a+D) + L_w(a) = S modulo 2^w`, with `0 < s < r1 < r2 < w`.
@@ -36,8 +36,8 @@ The C++ reference limits width to 512 and span to 12. The Python reference limit
 
 `paper.tex` contains the full proof and references. `frontier.cpp`, `count.py` and `reference.py` are the three exact implementations. `check_small.cpp` provides the independent forward histogram comparison. `verify.py` runs the published replay. `evidence/verification.json` records the result.
 
-`visual/graph.json` is a complete accepted-transition trace for a separate 24-bit illustration. It has 224 solutions and 496 forward state visits. `visual/build_scene.py` constructs its native Blender figure. The figure is not a timing comparison or a drawing of the 256-bit example.
+`visual/graph.json` is a complete accepted-transition trace for a separate 24-bit illustration. It has 224 solutions and 496 forward state visits. `visual/build_scene.py` constructs its native Blender figure.
 
-The manuscript credits the established S-function and finite-state arithmetic literature. The contribution is the sufficient frontier and exact cyclic-boundary construction for this particular equation.
+Building on the S-function and finite-state arithmetic methods of Mouha et al. (2011, doi:10.1007/978-3-642-19574-7_3) and Velichkov et al. (2011, doi:10.1007/978-3-642-21702-9_20), this paper constructs the sufficient frontier state and exact cyclic-boundary counting law for bounded-tap-span Boolean–modular equations.
 
 Paper, figure and data: CC BY 4.0. Code: MIT. See `LICENSE.md` and `CITATION.cff`.
