@@ -20,4 +20,3 @@ Observed native-cloud results:
 Every comparison passed. The general result follows from the case proof in
 `paper.tex`. The finite experiments support the implementations. The 42-bit
 stage-product bound requires independently recoverable local responses.
-It is not asserted for an observer restricted to reachable whole-word traces.

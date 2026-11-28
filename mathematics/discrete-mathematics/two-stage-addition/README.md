@@ -1,10 +1,10 @@
 # Exact State Complexity of Two-Stage Addition
 
-**🜘lmtlssss🜐 · 27 October 2026 · Version 1.0.0**
+**🜘lmtlssss🜐 · 28 November 2026 · Version 1.1.0**
 
 Mathematics / Discrete mathematics
 
-[Paper](https://github.com/lmtlssss/math/releases/download/addition-state-note-v1.0.0/paper.pdf) · [DOI](https://doi.org/10.5281/zenodo.23698617)
+[Paper](https://github.com/lmtlssss/math/releases/download/addition-state-note-v1.0.0/paper.pdf) · [DOI](https://doi.org/10.5281/zenodo.24618293)
 
 For fixed radix-B operands C,S,H, add C+S+a modulo B, then add H+b.
 The incoming carries a,b each range over zero and one. The response consists

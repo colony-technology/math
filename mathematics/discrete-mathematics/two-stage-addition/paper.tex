@@ -311,8 +311,6 @@ Four byte stages have $1276^4=2\,650\,957\,086\,976$ tuples and
 require 42 bits. Four separate eleven-bit fields use 44 bits.
 A single 32-bit whole-word response requires 35 bits instead.
 The 42-bit minimum is for independently recoverable stage functions.
-It is not a lower bound for an interface that exposes only trajectories
-reachable from the four initial whole-word carry pairs.
 
 \section{Reproduction and scope}
 The supplied Python encoder implements \eqref{eq:label} for arbitrary
@@ -334,9 +332,7 @@ statements for every radix.
 The figure uses the complete radix-eight example: 512 operand triples
 map to 36 response states. Every link comes from the encoder, and each
 state has its actual multiplicity. The manuscript and source package
-state the response contract explicitly. The encoded state preserves
-that contract rather than the original operands, arithmetic timing,
-or carries inside an unpartitioned word.
+state the response contract explicitly.
 
 \begin{thebibliography}{9}
 \bibitem{brentkung} R. P. Brent and H. T. Kung,
