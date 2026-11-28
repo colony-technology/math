@@ -160,7 +160,7 @@ $x$ & $x_6x_5\cdots x_0$ & $\ROR_1x\xor\ROR_3x$\\
 \bottomrule
 \end{tabular}
 \end{center}
-Since the mask is all ones, $x\land127=x$. The eight words have distinct three-bit prefixes. Consequently any injective binary label for the members of every fiber must allow at least three bits in the worst case. This is a bound on solution labels, rather than a lower bound for every inversion algorithm.
+Since the mask is all ones, $x\land127=x$. The eight words have distinct three-bit prefixes. Consequently any injective binary label for the members of every fiber must allow at least three bits in the worst case.
 
 \section{A larger cyclic boundary}
 The same derivation applies when the largest rotation is $r$.
@@ -184,7 +184,7 @@ $(x_w,\ldots,x_{w+r-1})=(x_0,\ldots,x_{r-1})$.
 The soundness, completeness and distinct-seed arguments in Theorem~\ref{thm:main} apply verbatim.
 \end{proof}
 
-For fixed $r$ this is linear work in $w$. When $r$ varies, the displayed algorithm is exponential in the boundary length $r$. The proposition supplies a constructive upper bound; it does not assert that this bound is optimal for other rotations.
+For fixed $r$ this is linear work in $w$. When $r$ varies, the displayed algorithm is exponential in the boundary length $r$. Proposition~\ref{prop:general} establishes a constructive upper bound of $2^r$ preimages and at most $2^r w$ local updates for every $2\le r<w$.
 
 \section{Relation to finite-state methods}
 Klimov and Shamir study T-functions, whose low output bits depend only on low input bits~\cite{klimovshamir}. Daum's narrow T-functions and solution graphs make explicit how bounded carried state supports exact equation solving~\cite{daum}. Boundary conditioning belongs to that established approach.

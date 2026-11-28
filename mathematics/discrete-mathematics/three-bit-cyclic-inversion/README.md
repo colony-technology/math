@@ -1,10 +1,10 @@
 # A Three-Bit Boundary for Cyclic Boolean–Modular Inversion
 
-**🜘lmtlssss🜐 · 27 October 2026 · Version 1.0.0**
+**🜘lmtlssss🜐 · 28 November 2026 · Version 1.1.0**
 
 Mathematics / Discrete mathematics
 
-[Paper](https://github.com/lmtlssss/math/releases/download/three-bit-note-v1.0.0/paper.pdf) · [DOI](https://doi.org/10.5281/zenodo.23680529)
+[Paper](https://github.com/lmtlssss/math/releases/download/three-bit-note-v1.0.0/paper.pdf) · [DOI](https://doi.org/10.5281/zenodo.24618370)
 
 For a word of width w >= 4, consider
 
