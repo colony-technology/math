@@ -14,4 +14,4 @@ Affine-map composition, augmented homogeneous coordinates, rank-nullity, row-spa
 
 The release combines these constructions in an explicit transported-cut comparison. It supplies the boundary defect, its affine consistency system, the rank restricted to the cycle's attainable displacement directions, and distinct minimum dimensions for all defects and all transported totals. Its polynomial extension uses a derivative coefficient matrix under the same linear-summary contract.
 
-The theorem statements and proofs define the mathematical contribution. They do not depend on a historical priority assertion. The references above are selected primary sources, rather than an exhaustive literature survey.
+The theorem statements and proofs define the mathematical contribution.

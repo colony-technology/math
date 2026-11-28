@@ -1,8 +1,8 @@
 # Affine Cycles: Exact Cut Defects and Minimal Retained State
 
-**🜘lmtlssss🜐 · 3 November 2026 · version 1.0.0**
+**🜘lmtlssss🜐 · 28 November 2026 · version 1.1.0**
 
-DOI: [10.5281/zenodo.23931722](https://doi.org/10.5281/zenodo.23931722)
+DOI: [10.5281/zenodo.24618347](https://doi.org/10.5281/zenodo.24618347)
 
 ## Result
 

@@ -2,7 +2,7 @@
   "schema": "mathematics.source.v1",
   "title": "Affine Cycles: Exact Cut Defects and Minimal Retained State",
   "doi": "10.5281/zenodo.23931722",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "files": [
     {
       "path": "CITATION.bib",

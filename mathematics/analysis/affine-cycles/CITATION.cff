@@ -3,10 +3,10 @@ message: "Please cite the manuscript and its exact mathematical certificates usi
 title: "Affine Cycles: Exact Cut Defects and Minimal Retained State"
 authors:
   - name: "🜘lmtlssss🜐"
-version: "1.0.0"
-date-released: "2026-11-03"
-doi: "10.5281/zenodo.23931722"
-url: "https://doi.org/10.5281/zenodo.23931722"
+version: "1.1.0"
+date-released: "2026-11-28"
+doi: "10.5281/zenodo.24618347"
+url: "https://doi.org/10.5281/zenodo.24618347"
 license: "CC-BY-4.0"
 type: dataset
 keywords:
