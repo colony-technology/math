@@ -1,10 +1,10 @@
 # Ordered Carry Frontiers for Parallel Addition
 
-**🜘lmtlssss🜐 · 27 October 2026 · Version 1.0.0**
+**🜘lmtlssss🜐 · 28 November 2026 · Version 1.1.0**
 
 Mathematics / Arithmetic automata and exact counting
 
-[Paper](https://github.com/lmtlssss/math/releases/download/shared-input-note-v1.0.0/paper.pdf) · [DOI](https://doi.org/10.5281/zenodo.23702847)
+[Paper](https://github.com/lmtlssss/math/releases/download/shared-input-note-v1.0.0/paper.pdf) · [DOI](https://doi.org/10.5281/zenodo.24618369)
 
 For m fixed offsets added to the same radix-B input, the joint carry vector at
 cut i has exactly one plus the number of distinct nonzero offset residues
@@ -45,6 +45,6 @@ The threshold ordering extends a two-sum, three-state lemma to arbitrary
 numbers of sums and arbitrary radices. The paper proves the exact all-output
 state count, residual lower bound, linear constructor, and masked counter.
 Automata and decision-diagram methods are established prior work, cited in
-the manuscript. This paper makes no worldwide algorithmic-priority claim.
+the manuscript.
 
 Paper, figure and data: CC BY 4.0. Executable source: MIT. See `LICENSE.md`.

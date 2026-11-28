@@ -20,10 +20,8 @@ solutions. Both implementations return the same count and least witness.
 The ordered implementation constructs 8,290 nonterminal source states and
 attempts 16,580 transitions. Its maximum layer width is 33.
 
-The native verification time was 19.852 seconds. It describes the
-complete verification run and is not a performance comparison.
+The native verification time was 19.852 seconds.
 The paper supplies the proofs for all widths, offsets and masks.
-No external replication or formal proof-kernel acceptance is claimed.
 
 The publication pass repeated the unchanged whole-input experiment successfully.
 `evidence/publication-verification.json` records that execution.

@@ -8,5 +8,5 @@ https://orbi.uliege.be/handle/2268/74877
 The statement here concerns fixed translations of one shared input. Its proof
 is the threshold-chain construction, exact residual-state count, stable binary
 partition, and exact masked counter. Finite checks support the executable
-construction. They do not establish worldwide priority. The cited general
+construction. The cited general
 methods remain attributed to their authors.
