@@ -1,10 +1,10 @@
 # Exact Counts of Sum-and-Carry Functions for Cascaded Addition
 
-**🜘lmtlssss🜐 · 27 October 2026 · Version 1.0.0**
+**🜘lmtlssss🜐 · 28 November 2026 · Version 1.1.0**
 
 Mathematics / Enumerative combinatorics
 
-[Paper](https://github.com/lmtlssss/math/releases/download/cascade-carry-note-v1.0.0/paper.pdf) · [DOI](https://doi.org/10.5281/zenodo.23700193)
+[Paper](https://github.com/lmtlssss/math/releases/download/cascade-carry-note-v1.0.0/paper.pdf) · [DOI](https://doi.org/10.5281/zenodo.24618367)
 
 For radix B >= 2, fix operands x0,...,xk. At stage i, add xi and an independently
 variable bit ai to the preceding residue. Retain the final residue and every
@@ -51,8 +51,7 @@ extension, with its own source certificate and DOI.
 
 The label preserves the final residue and every outgoing stage carry for all
 incoming-bit assignments. Several operand tuples can have the same label.
-The original operands are not recovered. The bit minimum is a representation
-bound, rather than a running-time or energy measurement. The coefficient
+The original operands are not recovered. The coefficient
 sequence A_k is classical; the manuscript cites its prior sources and related
 arithmetic literature.
 

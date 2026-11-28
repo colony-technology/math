@@ -1,12 +1,12 @@
 cff-version: 1.2.0
-message: "Cite the accompanying mathematical preprint. DOI: 10.5281/zenodo.23700193."
+message: "Cite the accompanying mathematical preprint. DOI: 10.5281/zenodo.24618367."
 title: "Exact Counts of Sum-and-Carry Functions for Cascaded Addition"
 authors:
   - family-names: "🜘lmtlssss🜐"
-doi: 10.5281/zenodo.23700193
-url: https://doi.org/10.5281/zenodo.23700193
-version: 1.0.0
-date-released: 2026-10-27
+doi: 10.5281/zenodo.24618367
+url: https://doi.org/10.5281/zenodo.24618367
+version: 1.1.0
+date-released: 2026-11-28
 license: CC-BY-4.0
 keywords:
   - arithmetic carries
@@ -20,4 +20,4 @@ preferred-citation:
   authors:
     - family-names: "🜘lmtlssss🜐"
   year: 2026
-  doi: 10.5281/zenodo.23700193
+  doi: 10.5281/zenodo.24618367

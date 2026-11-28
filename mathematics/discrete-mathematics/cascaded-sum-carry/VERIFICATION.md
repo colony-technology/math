@@ -30,10 +30,7 @@ functions, and their complete eight-input truth tables. Its source-to-class
 incidence is exact.
 
 Finite checks support the implementation. The manuscript supplies the proof
-for all integer radices and stage counts. These results are internal exact
-verification, not independent laboratory replication or a formal proof-kernel
-acceptance. The recorded execution time is a verification time, not a claimed
-speed advantage.
+for all integer radices and stage counts.
 
 The publication pass repeated the unchanged whole-function experiment.
 `evidence/publication-verification.json` preserves this separate execution.
