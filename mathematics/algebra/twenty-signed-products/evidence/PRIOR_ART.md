@@ -23,5 +23,4 @@ The predecessor is the author's exact nonnegative-rank calculation, DOI
 
 Targeted searches for this twelve-element composition tensor and the exact
 twenty-term factorization did not identify a matching prior construction.
-These searches establish neither worldwide priority nor an optimal signed
-rank. The paper records the exact instance, formulas and certificates.
+The paper records the exact instance, formulas and certificates.

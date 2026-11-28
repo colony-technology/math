@@ -1,10 +1,10 @@
 # Twenty Signed Products for a Twelve-State Composition Tensor
 
-**🜘lmtlssss🜐 · 27 October 2026 · Version 1.0.0**
+**🜘lmtlssss🜐 · 28 November 2026 · Version 1.1.0**
 
 Mathematics / Algebraic complexity
 
-[Paper](https://github.com/lmtlssss/math/releases/download/signed-tensor-note-v1.0.0/paper.pdf) · [DOI](https://doi.org/10.5281/zenodo.23695066)
+[Paper](https://github.com/lmtlssss/math/releases/download/signed-tensor-note-v1.0.0/paper.pdf) · [DOI](https://doi.org/10.5281/zenodo.24618344)
 
 The composition tensor of the specified twelve-element monoid has an integer
 factorization with twenty signed rank-one terms. Its nonnegative rank is
