@@ -23,9 +23,7 @@ This identity preserves every finite observation trace by induction.
 An affine interval extension carries a quadratic accumulated cost through the
 same associative composition, including cross-terms. We distinguish output
 preservation from witness-count preservation and specify the printed notation
-{\taafont ᑕ.}, spoken TAA. This paper names a contract and gives its elementary
-preservation theorem; it does not claim priority for quotient systems,
-bisimulation, or affine composition.
+{\taafont ᑕ.}, spoken TAA. Building on quotient transition systems~\cite{moore1956,nerode1958}, bisimulation~\cite{park1981,milner1989}, and affine-cost composition~\cite{affine}, this paper formalizes the exact state contraction contract and proves its trace-preservation theorem.
 \end{abstract}
 
 \section{The contract}
@@ -111,15 +109,11 @@ declared claim. A transparency receipt records registration under one
 service's policy. None of these substitutes for the others.
 
 The word \emph{exact} is relative to the declared observation and domain.
-The definition gives no claim that arbitrary systems admit a small
-retained state or that arbitrary program properties are efficiently
-decidable.
 
 \section{Symbol and prior results}
 The symbol {\taafont ᑕ.} consists of U+1455 CANADIAN SYLLABICS TA and
 U+002E FULL STOP. The existing glyph has a linguistic identity in the
-Unified Canadian Aboriginal Syllabics block. This paper assigns a
-mathematical use to those characters; it does not claim to create them.
+Unified Canadian Aboriginal Syllabics block.
 The software identifier is \texttt{taa}, with the versioned name
 \texttt{taa.exact-state-contraction.v1}.
 
@@ -134,5 +128,9 @@ the mathematical background of this proposal.
 Retained State}, Zenodo (2026), DOI: \href{https://doi.org/10.5281/zenodo.23931722}{10.5281/zenodo.23931722}.
 \bibitem{unicode} Unicode Consortium, \emph{Unified Canadian Aboriginal Syllabics}, Unicode Character Database, U+1455.
 \bibitem{scitt} IETF, \emph{An Architecture for Trustworthy and Transparent Digital Supply Chains}, RFC 9943 (2026).
+\bibitem{moore1956} E.~F. Moore, \emph{Gedanken-Experiments on Sequential Machines}, in \emph{Automata Studies}, Annals of Mathematics Studies 34, Princeton University Press (1956), 129--154, DOI: \href{https://doi.org/10.1515/9781400882618-006}{10.1515/9781400882618-006}.
+\bibitem{nerode1958} A.~Nerode, \emph{Linear automaton transformations}, Proc. Amer. Math. Soc. 9 (1958), 541--544, DOI: \href{https://doi.org/10.1090/S0002-9939-1958-0135681-9}{10.1090/S0002-9939-1958-0135681-9}.
+\bibitem{park1981} D.~Park, \emph{Concurrency and automata on infinite sequences}, Theoretical Computer Science, Lecture Notes in Computer Science 104, Springer (1981), 167--183, DOI: \href{https://doi.org/10.1007/BFb0017309}{10.1007/BFb0017309}.
+\bibitem{milner1989} R.~Milner, \emph{Communication and Concurrency}, Prentice Hall (1989), ISBN 978-0-13-115007-2.
 \end{thebibliography}
 \end{document}

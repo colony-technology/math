@@ -6,7 +6,7 @@
 
 **ᑕ.** (spoken **TAA**) denotes *exact state contraction*: a replacement of a computational representation by a retained state that preserves a declared observation contract for every admissible input. The operator includes the reduced transition rule and the map that recovers each declared observation.
 
-The term names a specified contract and its checkable construction. It does not name every state reduction, every hash, or a signature algorithm.
+The term names a specified contract and its checkable construction.
 
 Let an input-driven system be \(M=(S,U,F,Y,G)\). Its state is \(s\in S\), input is \(u\in U\), transition is \(F:S\times U\to S\), and observation is \(G:S\times U\to Y\). Let \(Q\) be a retained-state set. An **exact state contraction for \(G\)** is a surjection \(\pi:S\to Q\), a reduced transition \(\bar F:Q\times U\to Q\), and an observation map \(\bar G:Q\times U\to Y\) such that, for every \(s,u\),
 
@@ -61,17 +61,17 @@ A **ᑕ. certificate** binds an artifact digest to a precise claim, input domain
 
 For a statement of output uniqueness, preserve the possible output set for each declared input. For a statement of witness uniqueness, preserve witness identity or multiplicity as well. A checker must reject a claim whose preservation conditions are missing.
 
-The term **exact** refers to the observation contract over the stated domain. It does not claim that arbitrary programs admit small contractions or that every verification problem is efficiently decidable.
+The term **exact** refers to the observation contract over the stated domain.
 
 ## Notation and origin
 
-The printed operator is the two-character sequence **ᑕ.**: U+1455 CANADIAN SYLLABICS TA followed by U+002E FULL STOP. Its spoken name is **TAA**. U+1455 is an existing character in the Canadian Aboriginal Syllabics block. This proposal assigns it a *new mathematical use* and retains its established linguistic identity. Unicode does not assign academic meanings to mathematical applications of existing characters.
+The printed operator is the two-character sequence **ᑕ.**: U+1455 CANADIAN SYLLABICS TA followed by U+002E FULL STOP. Its spoken name is **TAA**. U+1455 is an existing character in the Canadian Aboriginal Syllabics block. This proposal assigns it a *new mathematical use* and retains its established linguistic identity.
 
 ASCII name: `taa`. Versioned identifier: `taa.exact-state-contraction.v1`.
 
 ## Relation to prior results
 
-The author previously proved exact affine-cost composition, cut-defect identities and minimal retained linear dimensions under explicit recovery contracts in **Affine Cycles: Exact Cut Defects and Minimal Retained State** (DOI: [10.5281/zenodo.23931722](https://doi.org/10.5281/zenodo.23931722)). Other prior papers give exact arithmetic-frontier constructions and certificates. This note names the shared *preservation contract*, proves its basic trace consequence, and fixes the printed notation. Quotient systems, congruence relations, automata minimization, bisimulation, and affine composition are established concepts. This proposal does not assert priority over those foundations.
+The author previously proved exact affine-cost composition, cut-defect identities and minimal retained linear dimensions under explicit recovery contracts in **Affine Cycles: Exact Cut Defects and Minimal Retained State** (DOI: [10.5281/zenodo.23931722](https://doi.org/10.5281/zenodo.23931722)). Other prior papers give exact arithmetic-frontier constructions and certificates. This note names the shared *preservation contract*, proves its basic trace consequence, and fixes the printed notation. Quotient systems, congruence relations, automata minimization, bisimulation, and affine composition are established concepts.
 
 ## References
 
